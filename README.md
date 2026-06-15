@@ -15,7 +15,7 @@ Astroで構築された、高速でレスポンシブな個人ポートフォリ
 ├── public/          # 静的アセット（画像、ファビコンなど）及びWebGL
 ├── src/
 │   ├── components/  # 再利用可能なUIコンポーネント
-|   ├── contents/    # 詳細ページのポスト等
+│   ├── contents/    # 詳細ページのポスト等
 │   ├── layouts/     # 共通ページレイアウト
 │   └── pages/       # ルーティング用ページ（Astro/Markdown）
 ├── astro.config.mjs # Astroの設定ファイル
