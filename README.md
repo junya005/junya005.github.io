@@ -1,4 +1,4 @@
-# My Portfolio
+# Portfolio
 
 Astroで構築された、高速でレスポンシブな個人ポートフォリオサイトです。
 
