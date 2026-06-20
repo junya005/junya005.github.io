@@ -39,7 +39,7 @@
     "id": "game-lilys-mystery-labyrinth",
     "category": "game",
     "title": "怪盗リリィと不思議の迷宮",
-    "description": "ガチャシステムを採用したクリッカーゲーム",
+    "description": "自動生成アルゴリズムを使用したローグライクゲーム",
     "period": "2026/5/30 - 2026/6/13",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/portfolio/games/LilyAndMysteryLabyrinth/index.html"
