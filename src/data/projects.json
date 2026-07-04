@@ -43,5 +43,14 @@
     "period": "2026/5/30 - 2026/6/13",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/portfolio/games/LilyAndMysteryLabyrinth/index.html"
+  },
+  {
+    "id": "game-catch-ball",
+    "category": "game",
+    "title": "キャッチボール",
+    "description": "重力や軌道予測を実装したキャッチボールゲーム",
+    "period": "2026/6/13 - 2026/6/20",
+    "thumbnailPath": "",
+    "projectPath": "https://junya005.github.io/portfolio/games/CatchBall/index.html"
   }
 ]
