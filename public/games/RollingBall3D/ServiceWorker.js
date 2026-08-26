@@ -1,4 +1,4 @@
-const cacheName = "DefaultCompany-3D_BallRunning-0.1.0";
+const cacheName = "junya005-Rolling the Ball 3D-0.1.0";
 const contentToCache = [
     "Build/RollingBall3D.loader.js",
     "Build/RollingBall3D.framework.js",

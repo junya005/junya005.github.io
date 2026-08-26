@@ -52,5 +52,14 @@
     "period": "2026/6/13 - 2026/6/20",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/portfolio/games/CatchBall/index.html"
+  },
+  {
+    "id": "game-rolling-ball-3d",
+    "category": "game",
+    "title": "玉転がし3D",
+    "description": "シンプルなステージ操作玉転がしゲーム",
+    "period": "2026/7/18 - 2026/8/22",
+    "thumbnailPath": "",
+    "projectPath": "https://junya005.github.io/portfolio/games/RollingBall3D/index.html"
   }
 ]
