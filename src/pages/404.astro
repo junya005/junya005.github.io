@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<!-- HTML -->
+<Layout title="404 Not Found">
+  <main class="main-content">
+    <h1>404 - ページが見つかりません</h1>
+    <p>お探しのページは移動または削除された可能性があります。</p>
+    <a href=`${baseUrl}`>トップページへ戻る</a>
+  </main>
+</Layout>
+
+<!-- CSS -->
+<style>
+  .main-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+</style>

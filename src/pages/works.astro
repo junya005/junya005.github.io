@@ -1,31 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import projects from "../data/projects.json";
+import Projects from "../data/projects.json";
 
-// ページを生成するための設定
-export function getStaticPaths() {
-  return [
-    { params: { category: "game" }, props: { title: "ゲーム作品" } },
-    { params: { category: "sound" }, props: { title: "サウンド作品" } },
-    {
-      params: { category: "illustration" },
-      props: { title: "イラスト作品" },
-    },
-  ];
-}
+const currentCategory = "all";
 
-const { category } = Astro.params;
-const { title } = Astro.props;
-
-// JSONから該当カテゴリーの作品だけを抽出
-const filteredProjects = projects.filter((p) => p.category === category);
+// カテゴリフィルターが有効でない時はすべての作品を表示するようにする
+const filteredProjects = Projects.filter((project) => {
+  return currentCategory === "all" || project.category === currentCategory;
+});
 ---
 
-<Layout title={title}>
+<!-- HTML -->
+<Layout title="Works">
   <main>
-    <h1>{title}</h1>
-
+    <h1>作品一覧</h1>
     {
       filteredProjects.length > 0 ? (
         <div class="project-grid">
@@ -40,12 +29,16 @@ const filteredProjects = projects.filter((p) => p.category === category);
   </main>
 </Layout>
 
+<!-- CSS -->
 <style>
+  /* メインコンテンツ全体の設定 */
   main {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
   }
+
+  /* 作品カードの配置設定 */
   .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

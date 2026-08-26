@@ -1,6 +1,7 @@
 /* global css */
 :root {}
 
+/* メインコンテンツのスタイル設定 */
 body {
   background-color: #ffffff;
   color: #8592a3;
@@ -8,7 +9,7 @@ body {
   font-family: sans-serif;
 }
 
-/* Markdown Theme */
+/* Markdown の書式設定 */
 .markdown-body h1 {
   padding-bottom: 0.3em;
   border-bottom: 1px solid #8592a3;

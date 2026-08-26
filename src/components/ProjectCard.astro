@@ -6,11 +6,18 @@ const { id, title, description, period, projectPath, thumbnailPath } =
 
 const detailUrl = `${baseUrl}/detail/${id}`;
 const thumbnailUrl = `${baseUrl}/${thumbnailPath}`;
+const replacementUrl = `${baseUrl}/images/thumbnails/replacement.png`;
 ---
 
+<!-- HTML -->
 <article class="card">
   <a href={detailUrl} class="thumbnail-link">
-    <img src={thumbnailUrl} alt={title} class="thumbnail" />
+    <img
+      src={thumbnailUrl}
+      alt={title}
+      onerror={`this.onerror=null; this.src='${replacementUrl}';`}
+      class="thumbnail"
+    />
   </a>
   <div class="content">
     <a href={detailUrl} class="title">
@@ -24,7 +31,9 @@ const thumbnailUrl = `${baseUrl}/${thumbnailPath}`;
   </div>
 </article>
 
+<!-- CSS -->
 <style>
+  /* カード全体のスタイル */
   .card {
     border: 1px solid #eee;
     border-radius: 8px;
@@ -45,6 +54,9 @@ const thumbnailUrl = `${baseUrl}/${thumbnailPath}`;
     margin-top: 0;
     color: #8592a3;
   }
+
+  /* カードの文字スタイル */
+  /* アクセス後の文字の色変更をブロック */
   .title,
   .title:visited,
   .title:active,

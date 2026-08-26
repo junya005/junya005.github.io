@@ -1,9 +1,9 @@
 ---
-// src/components/Footer.astro
 const today = new Date();
 const socialLinks = [{ name: "GitHub", url: "https://github.com/junya005" }];
 ---
 
+<!-- HTML and JavaScript -->
 <footer class="footer">
   <div class="container">
     <p>&copy; {today.getFullYear()} Junya Kobayashi. All rights reserved.</p>
@@ -19,7 +19,9 @@ const socialLinks = [{ name: "GitHub", url: "https://github.com/junya005" }];
   </div>
 </footer>
 
+<!-- CSS -->
 <style>
+  /* フッター全体のスタイル */
   .footer {
     background-color: #52c3f1;
     color: #fff;
@@ -28,6 +30,8 @@ const socialLinks = [{ name: "GitHub", url: "https://github.com/junya005" }];
     border-top: 1px solid #eee;
     margin-top: auto; /* レイアウトの最下部に固定する場合 */
   }
+
+  /* フッターコンテナの設定 */
   .container {
     max-width: 800px;
     margin: 0 auto;

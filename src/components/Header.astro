@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
+<!--  HTML -->
 <header class="site-header">
   <div class="container">
     <a href={`${baseUrl}/`} class="logo">
@@ -11,16 +12,20 @@ const baseUrl = import.meta.env.BASE_URL;
     </a>
     <nav class="nav">
       <ul>
-        <li><a href={`${baseUrl}/`}>ホーム</a></li>
-        <li><a href={`${baseUrl}/game/`}>ゲーム</a></li>
-        <li><a href={`${baseUrl}/sound/`}>サウンド</a></li>
-        <li><a href={`${baseUrl}/illustration/`}>イラスト</a></li>
+        <li><a href={`${baseUrl}/`}>Top</a></li>
+        <li><a href={`${baseUrl}/works/`}>Works</a></li>
+        <li><a href={`${baseUrl}/skills/`}>Skills</a></li>
+        <li><a href={`${baseUrl}/about/`}>About</a></li>
+        <li><a href={`${baseUrl}/contact/`}>Contact</a></li>
+        <li><a href={`${baseUrl}/credits/`}>Credits</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
+<!-- CSS -->
 <style>
+  /* ヘッダー全体のスタイル */
   .site-header {
     background-color: #52c3f1;
     color: #fff;
@@ -29,6 +34,8 @@ const baseUrl = import.meta.env.BASE_URL;
     top: 0;
     z-index: 100;
   }
+
+  /* ヘッダーコンテナのスタイル */
   .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -38,7 +45,8 @@ const baseUrl = import.meta.env.BASE_URL;
     padding: 0 1rem;
   }
 
-  /* リンクによる色変更の阻止 */
+  /* ロゴのスタイル */
+  /* アクセス履歴による文字色変更をブロック */
   .logo,
   .logo:visited,
   .logo:active,
@@ -55,6 +63,8 @@ const baseUrl = import.meta.env.BASE_URL;
     height: auto;
     display: block;
   }
+
+  /* ナビゲーションの文字スタイル */
   .nav ul {
     list-style: none;
     display: flex;
@@ -74,6 +84,7 @@ const baseUrl = import.meta.env.BASE_URL;
     text-decoration: underline;
   }
 
+  /* レスポンシブ対応 */
   @media (max-width: 600px) {
     .container {
       flex-direction: column;
