@@ -2,7 +2,7 @@
 title: LilyAndMysteryLabyrinth
 ---
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/LilyAndMysteryLabyrinth/)
+[こちらから遊べます](https://junya005.github.io/games/LilyAndMysteryLabyrinth/)
 
 ### 制作時間
 - 20時間

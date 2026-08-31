@@ -3,7 +3,7 @@ title: Rolling the Ball 3D
 ---
 
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/RollingBall3D/)
+[こちらから遊べます](https://junya005.github.io/games/RollingBall3D/)
 
 ### 制作時間
 - 30時間

@@ -2,7 +2,7 @@
 title: CatchBall
 ---
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/CatchBall/)
+[こちらから遊べます](https://junya005.github.io/games/CatchBall/)
 
 ### 制作時間
 - 18時間

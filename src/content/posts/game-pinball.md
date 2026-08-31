@@ -3,7 +3,7 @@ title: PinBall
 ---
 
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/PinBall/)
+[こちらから遊べます](https://junya005.github.io/games/PinBall/)
 
 ### 制作時間
 - 2時間

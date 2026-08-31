@@ -3,7 +3,7 @@ title: KamiSumo
 ---
 
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/KamiSumo/)
+[こちらから遊べます](https://junya005.github.io/games/KamiSumo/)
 
 ### 制作時間
 - 8時間

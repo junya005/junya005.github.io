@@ -2,7 +2,7 @@
 title: OreClicker
 ---
 
-[こちらから遊べます](https://junya005.github.io/portfolio/games/OreClicker/)
+[こちらから遊べます](https://junya005.github.io/games/OreClicker/)
 
 ### 制作時間
 - 6時間
