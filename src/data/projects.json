@@ -14,7 +14,7 @@
     "title": "Cloud PinBall",
     "description": "雲をテーマにしたピンボールゲーム",
     "period": "2026/4/25 - 2026/5/9",
-    "thumbnailPath": "/images/thumbnails/CloudPinBall_logo.png",
+    "thumbnailPath": "images/thumbnails/CloudPinBall_logo.png",
     "projectPath": "https://junya005.github.io/games/CloudPinBall/index.html"
   },
   {
