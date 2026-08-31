@@ -6,7 +6,7 @@
     "description": "チープなピンボールゲームです",
     "period": "2025/9",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/PinBall/index.html"
+    "projectPath": "https://junya005.github.io/games/PinBall/index.html"
   },
   {
     "id": "game-cloud-pinball",
@@ -15,7 +15,7 @@
     "description": "雲をテーマにしたピンボールゲーム",
     "period": "2026/4/25 - 2026/5/9",
     "thumbnailPath": "/images/thumbnails/CloudPinBall_logo.png",
-    "projectPath": "https://junya005.github.io/portfolio/games/CloudPinBall/index.html"
+    "projectPath": "https://junya005.github.io/games/CloudPinBall/index.html"
   },
   {
     "id": "game-kami-sumo",
@@ -24,7 +24,7 @@
     "description": "紙相撲ゲーム",
     "period": "2026/5/9 - 2026/5/16",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/KamiSumo/index.html"
+    "projectPath": "https://junya005.github.io/games/KamiSumo/index.html"
   },
   {
     "id": "game-ore-clicker",
@@ -33,7 +33,7 @@
     "description": "ガチャシステムを採用したクリッカーゲーム",
     "period": "2026/5/23 - 2026/5/30",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/OreClicker/index.html"
+    "projectPath": "https://junya005.github.io/games/OreClicker/index.html"
   },
   {
     "id": "game-lilys-mystery-labyrinth",
@@ -42,7 +42,7 @@
     "description": "自動生成アルゴリズムを使用したローグライクゲーム",
     "period": "2026/5/30 - 2026/6/13",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/LilyAndMysteryLabyrinth/index.html"
+    "projectPath": "https://junya005.github.io/games/LilyAndMysteryLabyrinth/index.html"
   },
   {
     "id": "game-catch-ball",
@@ -51,7 +51,7 @@
     "description": "重力や軌道予測を実装したキャッチボールゲーム",
     "period": "2026/6/13 - 2026/6/20",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/CatchBall/index.html"
+    "projectPath": "https://junya005.github.io/games/CatchBall/index.html"
   },
   {
     "id": "game-rolling-ball-3d",
@@ -60,6 +60,6 @@
     "description": "シンプルなステージ操作玉転がしゲーム",
     "period": "2026/7/18 - 2026/8/22",
     "thumbnailPath": "",
-    "projectPath": "https://junya005.github.io/portfolio/games/RollingBall3D/index.html"
+    "projectPath": "https://junya005.github.io/games/RollingBall3D/index.html"
   }
 ]
