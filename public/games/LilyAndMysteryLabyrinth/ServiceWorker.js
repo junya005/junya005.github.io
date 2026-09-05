@@ -1,4 +1,4 @@
-const cacheName = "DefaultCompany-RogueLikeLabyrinth-0.1.0";
+const cacheName = "DefaultCompany-RogueLikeLabyrinth-0.2.0";
 const contentToCache = [
     "Build/LilyAndMysteryLabyrinth.loader.js",
     "Build/LilyAndMysteryLabyrinth.framework.js",
