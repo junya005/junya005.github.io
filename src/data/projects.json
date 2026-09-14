@@ -61,5 +61,14 @@
     "period": "2026/7/18 - 2026/8/22",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/RollingBall3D/index.html"
+  },
+  {
+    "id": "game-3d-shooting",
+    "category": "game",
+    "title": "シンプルFPS",
+    "description": "制限時間内に出る的を撃ち続けていくゲーム",
+    "period": "2026/7/18 - 2026/8/22",
+    "thumbnailPath": "",
+    "projectPath": "https://junya005.github.io/games/SimpleShooter3D/index.html"
   }
 ]
