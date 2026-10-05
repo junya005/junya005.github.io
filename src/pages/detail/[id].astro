@@ -1,33 +1,340 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import projects from "../../data/projects.json";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
-  return allPosts.map((entry) => ({
-    params: { id: entry.id },
-    props: { entry },
-  }));
+  return allPosts.map((entry) => {
+    // projects.json から一致するプロジェクト情報を取得
+    const projectMeta = projects.find((p) => p.id === entry.id) || null;
+    return {
+      params: { id: entry.id },
+      props: { entry, projectMeta },
+    };
+  });
 }
 
-const { entry } = Astro.props;
-
+const { entry, projectMeta } = Astro.props;
 const { Content } = await render(entry);
+
+const rawBase = import.meta.env.BASE_URL;
+const baseUrl = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+
+const pageTitle = projectMeta?.title || entry.data.title;
+const playUrl = projectMeta?.projectPath;
+const githubUrl = projectMeta?.githubUrl;
 ---
 
-<Layout title={entry.data.title}>
-  <main>
-    <div class="markdown-body">
-      <h1>{entry.data.title}</h1>
-      <Content />
+<Layout
+  title={`${pageTitle} - 作品詳細`}
+  description={projectMeta?.description || `${pageTitle}のゲーム制作詳細・技術解説です。`}
+>
+  <div class="detail-page">
+    <!-- パンくずリスト -->
+    <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+      <div class="container breadcrumb-inner">
+        <a href={baseUrl}>Top</a>
+        <span class="sep">/</span>
+        <a href={`${baseUrl}works/`}>Works</a>
+        <span class="sep">/</span>
+        <span class="current">{pageTitle}</span>
+      </div>
+    </nav>
+
+    <div class="container detail-container">
+      <!-- 1. 就活用メタ情報ヘッダーカード -->
+      <section class="meta-header-card">
+        <div class="meta-top-row">
+          <div class="meta-tags">
+            {projectMeta?.tags?.map((tag) => (
+              <span class="badge-tag">{tag}</span>
+            ))}
+            {projectMeta?.isFeatured && (
+              <span class="badge-tag badge-accent">Featured 代表作</span>
+            )}
+          </div>
+          <span class="meta-period">制作期間: {projectMeta?.duration || projectMeta?.period}</span>
+        </div>
+
+        <h1 class="project-title">{pageTitle}</h1>
+
+        {projectMeta?.description && (
+          <p class="project-lead">{projectMeta.description}</p>
+        )}
+
+        <!-- スペックグリッド -->
+        <div class="spec-grid">
+          <div class="spec-item">
+            <span class="spec-label">担当役割</span>
+            <span class="spec-value">{projectMeta?.role || "プログラミング"}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">プラットフォーム</span>
+            <span class="spec-value">PC WebGL (ブラウザ実行)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">使用エンジン / 言語</span>
+            <span class="spec-value">Unity / C#</span>
+          </div>
+        </div>
+
+        {projectMeta?.techHighlight && (
+          <div class="highlight-banner">
+            <div class="banner-badge">技術ハイライト</div>
+            <p class="banner-text">{projectMeta.techHighlight}</p>
+          </div>
+        )}
+
+        <!-- アクションボタン -->
+        <div class="meta-actions">
+          {playUrl && (
+            <a
+              href={playUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <span>ブラウザで今すぐプレイ (WebGL)</span>
+            </a>
+          )}
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span>GitHubで見る</span>
+            </a>
+          )}
+          <a href={`${baseUrl}works/`} class="btn btn-secondary">
+            <span>← 作品一覧に戻る</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. 技術解説 & 制作ストーリー本文 (Markdown) -->
+      <article class="content-card">
+        <div class="content-badge">TECHNICAL NOTE & STORY</div>
+        <div class="markdown-body">
+          <Content />
+        </div>
+      </article>
+
+      <!-- 下部ナビゲーション -->
+      <div class="bottom-nav">
+        <a href={`${baseUrl}works/`} class="btn btn-outline">
+          ← すべての作品一覧へ
+        </a>
+      </div>
     </div>
-  </main>
+  </div>
 </Layout>
 
 <style>
-  main {
-    max-width: 1000px;
+  .detail-page {
+    background-color: var(--color-surface-cloud);
+    min-height: calc(100vh - 160px);
+    padding-bottom: 5rem;
+  }
+
+  .container {
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  /* パンくずリスト */
+  .breadcrumb-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+    font-size: 0.88rem;
+  }
+
+  .breadcrumb-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-inner a {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb-inner .sep {
+    color: var(--color-text-light);
+  }
+
+  .breadcrumb-inner .current {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .detail-container {
+    padding-top: 2.5rem;
+  }
+
+  /* 1. メタ情報ヘッダーカード */
+  .meta-header-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-md);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .meta-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .meta-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-period {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .project-title {
+    font-size: 2.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-main);
+  }
+
+  .project-lead {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+  }
+
+  /* スペックグリッド */
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background: var(--color-surface-cloud);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .spec-label {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .spec-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+  }
+
+  /* ハイライトバナー */
+  .highlight-banner {
+    background: linear-gradient(135deg, var(--color-primary-subtle) 0%, #fff6f8 100%);
+    border: 1px solid rgba(72, 184, 236, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .banner-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .banner-text {
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .meta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* 2. 本文カード */
+  .content-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-sm);
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .content-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .bottom-nav {
+    text-align: center;
+  }
+
+  @media (max-width: 680px) {
+    .meta-header-card {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.8rem;
+    }
+
+    .spec-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .content-card {
+      padding: 1.75rem 1.25rem;
+    }
+
+    .meta-actions {
+      flex-direction: column;
+    }
   }
 </style>
