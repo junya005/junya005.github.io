@@ -1,0 +1,235 @@
+---
+---
+
+<section id="skills" class="section skills-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-sub">TECH STACK</span>
+      <h2 class="section-title">スキルセット</h2>
+      <p class="section-desc">
+        ゲーム制作とソフトウェア開発で使用している主な言語・技術・ツールです。
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      <!-- ゲーム開発 / 言語 -->
+      <div class="skill-category-card">
+        <div class="cat-header">
+          <div class="cat-icon-wrap blue">🎮</div>
+          <div>
+            <h3 class="cat-title">ゲーム開発 & 言語</h3>
+            <p class="cat-subtitle">Game Development & Core</p>
+          </div>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">C#</span>
+              <span class="skill-tag">メイン言語</span>
+            </div>
+            <p class="skill-detail">
+              オブジェクト指向設計、ステートマシンパターン、イベント駆動処理、データ構造の基礎を理解し実装できます。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">Unity (2D / 3D)</span>
+              <span class="skill-tag">エンジン</span>
+            </div>
+            <p class="skill-detail">
+              物理エンジン（Rigidbody/Collider）、アニメーション、UI（uGUI）、プレハブ設計、WebGLビルド展開の運用経験があります。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">物理演算・アルゴリズム</span>
+              <span class="skill-tag">強み</span>
+            </div>
+            <p class="skill-detail">
+              放物線のリアルタイム軌道予測（重力・初速演算）、迷宮の空間自動分割（BSPTree）、重み付け確率抽選などを制作に適用しています。
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 開発環境 & ツール -->
+      <div class="skill-category-card">
+        <div class="cat-header">
+          <div class="cat-icon-wrap pink">🛠️</div>
+          <div>
+            <h3 class="cat-title">開発環境 & ツール</h3>
+            <p class="cat-subtitle">Environment & Tools</p>
+          </div>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">Git / GitHub</span>
+              <span class="skill-tag">バージョン管理</span>
+            </div>
+            <p class="skill-detail">
+              コミット・ブランチ運用、GitHub Pagesを利用したWebGLゲームのWebホスティング・自動公開フローを構築しています。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">Blender</span>
+              <span class="skill-tag">3Dモデリング基礎</span>
+            </div>
+            <p class="skill-detail">
+              ゲーム内で使用するシンプルな3Dプロップやステージ用アセットの基本モデリング・UV展開・エクスポートを行えます。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">VS Code / IDE</span>
+              <span class="skill-tag">エディタ</span>
+            </div>
+            <p class="skill-detail">
+              拡張機能やAI支援ツール（生成AIでの寸法リサーチや設計相談）を適宜取り入れ、効率的な開発ワークフローを実践しています。
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .container {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 5rem 0;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3rem;
+  }
+
+  .section-sub {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .skill-category-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    padding: 2rem;
+    box-shadow: var(--shadow-cloud-sm);
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .cat-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .cat-icon-wrap.blue {
+    background-color: var(--color-primary-light);
+  }
+
+  .cat-icon-wrap.pink {
+    background-color: var(--color-accent-soft);
+  }
+
+  .cat-title {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .cat-subtitle {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .skill-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-text-main);
+  }
+
+  .skill-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .skill-detail {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

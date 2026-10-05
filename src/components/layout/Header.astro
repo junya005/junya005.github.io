@@ -1,8 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
+import { getBaseUrl } from "../../utils/url";
 
-const rawBase = import.meta.env.BASE_URL;
-const baseUrl = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+const baseUrl = getBaseUrl();
 ---
 
 <header class="site-header">

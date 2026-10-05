@@ -2,12 +2,15 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 import projects from "../../data/projects.json";
+import type { Project } from "../../types/project";
+import { getBaseUrl } from "../../utils/url";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
+  const typedProjects = projects as Project[];
   return allPosts.map((entry) => {
     // projects.json から一致するプロジェクト情報を取得
-    const projectMeta = projects.find((p) => p.id === entry.id) || null;
+    const projectMeta = typedProjects.find((p) => p.id === entry.id) || null;
     return {
       params: { id: entry.id },
       props: { entry, projectMeta },
@@ -15,11 +18,15 @@ export async function getStaticPaths() {
   });
 }
 
+interface Props {
+  entry: any;
+  projectMeta: Project | null;
+}
+
 const { entry, projectMeta } = Astro.props;
 const { Content } = await render(entry);
 
-const rawBase = import.meta.env.BASE_URL;
-const baseUrl = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+const baseUrl = getBaseUrl();
 
 const pageTitle = projectMeta?.title || entry.data.title;
 const playUrl = projectMeta?.projectPath;

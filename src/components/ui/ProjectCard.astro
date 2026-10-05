@@ -1,20 +1,15 @@
 ---
-interface Props {
+import type { Project } from "../../types/project";
+import { getDetailUrl, resolveAssetUrl } from "../../utils/url";
+
+interface Props extends Partial<Project> {
   id: string;
   title: string;
   description: string;
   period: string;
-  duration?: string;
-  role?: string;
-  tags?: string[];
   projectPath: string;
   thumbnailPath: string;
-  techHighlight?: string;
-  isFeatured?: boolean;
 }
-
-const rawBase = import.meta.env.BASE_URL;
-const baseUrl = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
 
 const {
   id,
@@ -30,14 +25,14 @@ const {
   isFeatured = false,
 } = Astro.props;
 
-const detailUrl = `${baseUrl}detail/${id}/`;
+const detailUrl = getDetailUrl(id);
 const hasThumbnail = Boolean(thumbnailPath);
-const thumbnailUrl = hasThumbnail ? `${baseUrl}${thumbnailPath}` : "";
+const thumbnailUrl = resolveAssetUrl(thumbnailPath);
 ---
 
 <article class="project-card" data-tags={tags.join(",")}>
   {isFeatured && <div class="featured-ribbon">Featured</div>}
-  
+
   <a href={detailUrl} class="thumb-link" tabindex="-1" aria-hidden="true">
     {
       hasThumbnail ? (
@@ -112,7 +107,10 @@ const thumbnailUrl = hasThumbnail ? `${baseUrl}${thumbnailPath}` : "";
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
   }
 
   .project-card:hover {

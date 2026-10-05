@@ -1,7 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import projects from "../data/projects.json";
+import ProjectCard from "../components/ui/ProjectCard.astro";
+import projectsData from "../data/projects.json";
+import type { Project } from "../types/project";
+
+const projects = projectsData as Project[];
 
 // ユニークなタグ一覧を抽出
 const allTags = Array.from(
