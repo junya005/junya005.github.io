@@ -1,48 +1,303 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import Projects from "../data/projects.json";
+import projects from "../data/projects.json";
 
-const currentCategory = "all";
+// ユニークなタグ一覧を抽出
+const allTags = Array.from(
+  new Set(projects.flatMap((project) => project.tags || []))
+);
 
-// カテゴリフィルターが有効でない時はすべての作品を表示するようにする
-const filteredProjects = Projects.filter((project) => {
-  return currentCategory === "all" || project.category === currentCategory;
-});
+// フィルタ用主要タグ
+const filterCategories = [
+  { id: "all", label: "すべて" },
+  { id: "featured", label: "代表作 (Featured)" },
+  { id: "3D", label: "3D作品" },
+  { id: "2D", label: "2D作品" },
+  { id: "アルゴリズム", label: "アルゴリズム" },
+  { id: "物理演算", label: "物理演算" },
+];
 ---
 
-<!-- HTML -->
-<Layout title="Works">
-  <main>
-    <h1>作品一覧</h1>
-    {
-      filteredProjects.length > 0 ? (
-        <div class="project-grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
+<Layout
+  title="作品一覧 (Works)"
+  description="小林 純也 が制作したUnityゲーム作品一覧。2D/3Dアクション、物理演算、アルゴリズム実装などの作品を掲載しています。"
+>
+  <div class="works-page">
+    <div class="works-header">
+      <div class="container">
+        <span class="section-sub">PORTFOLIO</span>
+        <h1 class="page-title">制作実績・作品一覧</h1>
+        <p class="page-lead">
+          UnityおよびC#を用いて制作したゲーム作品（全 {projects.length} 件）です。<br />
+          気になる技術やジャンルで絞り込んでご覧いただけます。全作品ブラウザ上で直接プレイ可能です。
+        </p>
+
+        <!-- タグフィルター -->
+        <div class="filter-container">
+          <span class="filter-label">タグで絞り込み:</span>
+          <div class="filter-buttons" role="tablist">
+            {
+              filterCategories.map((cat, index) => (
+                <button
+                  type="button"
+                  class={`filter-btn ${index === 0 ? "active" : ""}`}
+                  data-filter={cat.id}
+                  role="tab"
+                  aria-selected={index === 0 ? "true" : "false"}
+                >
+                  {cat.label}
+                </button>
+              ))
+            }
+          </div>
         </div>
-      ) : (
-        <p>作品は準備中です。</p>
-      )
-    }
-  </main>
+
+        <div class="result-count">
+          表示中: <span id="visible-count">{projects.length}</span> / {projects.length} 件
+        </div>
+      </div>
+    </div>
+
+    <main class="container works-main">
+      <div class="project-grid" id="project-grid">
+        {
+          projects.map((project) => (
+            <div
+              class="grid-item"
+              data-tags={project.tags?.join(",") || ""}
+              data-featured={project.isFeatured ? "true" : "false"}
+            >
+              <ProjectCard {...project} />
+            </div>
+          ))
+        }
+      </div>
+
+      <div id="no-results" class="no-results" style="display: none;">
+        <span class="no-results-icon">🔍</span>
+        <p>該当する作品が見つかりませんでした。</p>
+        <button type="button" class="btn btn-secondary" id="reset-filter">
+          すべての作品を表示する
+        </button>
+      </div>
+    </main>
+  </div>
 </Layout>
 
-<!-- CSS -->
-<style>
-  /* メインコンテンツ全体の設定 */
-  main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem;
+<!-- クライアントサイドフィルタスクリプト -->
+<script>
+  function setupFilter() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const gridItems = document.querySelectorAll<HTMLElement>(".grid-item");
+    const countDisplay = document.getElementById("visible-count");
+    const noResults = document.getElementById("no-results");
+    const resetBtn = document.getElementById("reset-filter");
+
+    function applyFilter(filterId: string) {
+      let visibleCount = 0;
+
+      gridItems.forEach((item) => {
+        const itemTags = item.dataset.tags || "";
+        const isFeatured = item.dataset.featured === "true";
+
+        let matches = false;
+
+        if (filterId === "all") {
+          matches = true;
+        } else if (filterId === "featured") {
+          matches = isFeatured;
+        } else {
+          matches = itemTags.split(",").includes(filterId);
+        }
+
+        if (matches) {
+          item.style.display = "block";
+          visibleCount++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      if (countDisplay) {
+        countDisplay.textContent = visibleCount.toString();
+      }
+
+      if (noResults) {
+        noResults.style.display = visibleCount === 0 ? "block" : "none";
+      }
+
+      // ボタンのアクティブ状態更新
+      filterButtons.forEach((btn) => {
+        const isActive = btn.dataset.filter === filterId;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filterId = btn.dataset.filter || "all";
+        applyFilter(filterId);
+      });
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        applyFilter("all");
+      });
+    }
   }
 
-  /* 作品カードの配置設定 */
+  // 初回実行およびAstroのページ遷移対応
+  document.addEventListener("DOMContentLoaded", setupFilter);
+</script>
+
+<style>
+  .works-page {
+    background-color: var(--color-surface-cloud);
+    min-height: calc(100vh - 160px);
+    padding-bottom: 5rem;
+  }
+
+  .works-header {
+    background: linear-gradient(180deg, #f0f9ff 0%, var(--color-surface-cloud) 100%);
+    padding: 3.5rem 0 2rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-sub {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-title {
+    font-size: 2.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .page-lead {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 650px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  /* フィルタコンテナ */
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .filter-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    background: #ffffff;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text-body);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-cloud-sm);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #35a5db 100%);
+    border-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(72, 184, 236, 0.35);
+  }
+
+  .result-count {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  #visible-count {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  /* メイングリッド */
+  .works-main {
+    padding-top: 2.5rem;
+  }
+
   .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+  }
+
+  .grid-item {
+    transition: opacity 0.3s ease;
+  }
+
+  /* 検索結果ゼロの場合 */
+  .no-results {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-border);
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+
+  .no-results-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .no-results p {
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .page-title {
+      font-size: 1.8rem;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
