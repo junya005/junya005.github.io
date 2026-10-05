@@ -5,9 +5,9 @@ Astroで構築された、高速でレスポンシブな個人ポートフォリ
 ## 🚀 技術スタック
 
 - **フレームワーク:** [Astro](https://astro.build/)
-- **スタイリング:** なし
-- **主なインテグレーション:** なし
-- **デプロイ先:** Github Pages
+- **主なインテグレーション:** [astro-icon](https://github.com/natemoo-re/astro-icon)
+- **ツール / 開発支援:** Antigravity
+- **デプロイ先:** GitHub Pages
 
 ## 📁 ディレクトリ構成
 
