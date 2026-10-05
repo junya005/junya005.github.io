@@ -1,20 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Profile from "../components/Profile.astro";
+import Hero from "../components/sections/Hero.astro";
+import FeaturedWorks from "../components/sections/FeaturedWorks.astro";
+import Skills from "../components/sections/Skills.astro";
+import About from "../components/sections/About.astro";
+import Contact from "../components/sections/Contact.astro";
 ---
 
 <Layout title="Top">
-  <div class="container">
-    <h1>ポートフォリオ</h1>
-    <h3>過去に作った作品をまとめております。</h3>
-    <Profile />
-  </div>
+  <Hero />
+  <FeaturedWorks />
+  <Skills />
+  <About />
+  <Contact />
 </Layout>
-
-<style>
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-</style>

@@ -1,0 +1,342 @@
+---
+import projectsData from "../../data/projects.json";
+import type { Project } from "../../types/project";
+import { getBaseUrl, getDetailUrl, resolveAssetUrl } from "../../utils/url";
+
+const projects = projectsData as Project[];
+const featuredProjects = projects.filter((p) => p.isFeatured);
+const baseUrl = getBaseUrl();
+---
+
+<section id="featured" class="section featured-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-sub">PICK UP WORKS</span>
+      <h2 class="section-title">代表作（Featured）</h2>
+      <p class="section-desc">
+        アルゴリズム、物理・数学演算、世界観の作り込みの観点から特に注力した3作品です。
+      </p>
+    </div>
+
+    <div class="featured-grid">
+      {
+        featuredProjects.map((project, index) => {
+          const detailUrl = getDetailUrl(project.id);
+          const hasThumbnail = Boolean(project.thumbnailPath);
+          const thumbSrc = resolveAssetUrl(project.thumbnailPath);
+
+          return (
+            <article class="featured-card">
+              <div class="featured-badge">Featured #{index + 1}</div>
+              <div class="featured-thumb-wrap">
+                {hasThumbnail ? (
+                  <img
+                    src={thumbSrc}
+                    alt={project.title}
+                    class="featured-thumb-img"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="thumb-placeholder">
+                    <span class="placeholder-icon">🎮</span>
+                    <span class="placeholder-title">{project.title}</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="featured-body">
+                <div class="card-tags">
+                  {project.tags.map((tag) => (
+                    <span class="badge-tag">{tag}</span>
+                  ))}
+                </div>
+
+                <h3 class="featured-card-title">
+                  <a href={detailUrl}>{project.title}</a>
+                </h3>
+
+                <p class="featured-desc">{project.description}</p>
+
+                {project.techHighlight && (
+                  <div class="highlight-box">
+                    <span class="highlight-label">技術ハイライト</span>
+                    <p class="highlight-content">{project.techHighlight}</p>
+                  </div>
+                )}
+
+                <div class="card-meta">
+                  <span class="meta-item">⏱ 期間: {project.duration || project.period}</span>
+                  {project.role && <span class="meta-item">👤 {project.role}</span>}
+                </div>
+
+                <div class="card-footer-actions">
+                  <a
+                    href={project.projectPath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary btn-sm"
+                  >
+                    <span>▶ WebGLでプレイ</span>
+                  </a>
+                  <a href={detailUrl} class="btn btn-outline btn-sm">
+                    <span>技術解説を読む →</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+
+    <div class="all-works-cta">
+      <p class="cta-note">この他にも多数のゲーム作品を公開しています</p>
+      <a href={`${baseUrl}works/`} class="btn btn-primary btn-large">
+        <span>すべての作品を見る（全 {projects.length} 件）</span>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .container {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 5rem 0;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3rem;
+  }
+
+  .section-sub {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .featured-section {
+    background-color: var(--color-surface-cloud);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .featured-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-sm);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(72, 184, 236, 0.4);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .featured-thumb-wrap {
+    height: 180px;
+    background-color: #f1f8fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .featured-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-card:hover .featured-thumb-img {
+    transform: scale(1.04);
+  }
+
+  .thumb-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+  }
+
+  .placeholder-icon {
+    font-size: 2.5rem;
+  }
+
+  .placeholder-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .featured-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .featured-card-title a {
+    color: var(--color-text-main);
+  }
+
+  .featured-card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .featured-desc {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .highlight-box {
+    background-color: var(--color-primary-subtle);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.65rem 0.85rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .highlight-content {
+    font-size: 0.84rem;
+    color: var(--color-text-body);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.25rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .card-footer-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.84rem;
+    flex: 1;
+    text-align: center;
+  }
+
+  .all-works-cta {
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  .cta-note {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-large {
+    padding: 0.85rem 2.2rem;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 960px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+  }
+</style>

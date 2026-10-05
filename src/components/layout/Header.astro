@@ -1,0 +1,277 @@
+---
+import { Icon } from "astro-icon/components";
+import { getBaseUrl } from "../../utils/url";
+
+const baseUrl = getBaseUrl();
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href={baseUrl} class="logo" aria-label="Junya005 Portfolio Top">
+      <div class="logo-wrap">
+        <Icon name="junya005" class="logo-icon" />
+      </div>
+    </a>
+    <nav class="nav" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href={`${baseUrl}#top`} class="nav-link" data-section="top">Top</a></li>
+        <li><a href={`${baseUrl}#featured`} class="nav-link" data-section="featured">Featured</a></li>
+        <li><a href={`${baseUrl}#skills`} class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href={`${baseUrl}#about`} class="nav-link" data-section="about">About</a></li>
+        <li><a href={`${baseUrl}#contact`} class="nav-link cta-link" data-section="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  function setupScrollSpy() {
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[data-section]');
+    if (navLinks.length === 0) return;
+
+    // 対象セクションIDのリスト
+    const sectionIds = Array.from(navLinks)
+      .map((link) => link.dataset.section)
+      .filter((id): id is string => Boolean(id));
+
+    // セクションDOM要素の取得
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    // トップページ以外などセクションが存在しない場合は実行しない
+    if (sections.length === 0) return;
+
+    function updateActiveNav() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const headerOffset = 140; // ヘッダー高さ＋判定バッファ
+
+      // ページ最下部付近にスクロールしている場合は最後のセクション（contact）をアクティブに
+      if (scrollY + windowHeight >= docHeight - 70) {
+        setActive(sectionIds[sectionIds.length - 1]);
+        return;
+      }
+
+      // ページ最上部付近にいる場合は最初のセクション（top）をアクティブに
+      if (scrollY < 180) {
+        setActive(sectionIds[0]);
+        return;
+      }
+
+      // スクロール位置に基づいて現在表示中のセクションを判定
+      let currentSectionId = sectionIds[0];
+      for (const section of sections) {
+        const top = section.offsetTop - headerOffset;
+        if (scrollY >= top) {
+          currentSectionId = section.id;
+        } else {
+          break;
+        }
+      }
+
+      setActive(currentSectionId);
+    }
+
+    function setActive(id: string) {
+      navLinks.forEach((link) => {
+        const isActive = link.dataset.section === id;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    // 初回実行
+    updateActiveNav();
+
+    // スクロール時に軽量に追従
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateActiveNav();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    window.addEventListener('resize', updateActiveNav, { passive: true });
+  }
+
+  // 通常読み込みとAstroのページ遷移イベントに対応
+  document.addEventListener('DOMContentLoaded', setupScrollSpy);
+  document.addEventListener('astro:page-load', setupScrollSpy);
+</script>
+
+<style>
+  .site-header {
+    background: rgba(72, 184, 236, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(72, 184, 236, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .logo-wrap {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .logo-wrap:hover {
+    transform: scale(1.04);
+  }
+
+  .logo-icon {
+    width: 100%;
+    height: auto;
+    display: block;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.4rem 0.65rem 0.55rem;
+    border-radius: var(--radius-sm);
+    position: relative;
+    display: inline-block;
+    transition: all 0.2s ease;
+  }
+
+  /* 下線インジケーター */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: var(--radius-pill);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+    transform-origin: center;
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link:hover::after {
+    transform: translateX(-50%) scaleX(0.5);
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* 現在画面に表示中のセクション：フォーカス＆下線 */
+  .nav-link.active {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+    background-color: #ffffff;
+    box-shadow: 0 1px 6px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Contact CTAリンク（ほっぺピンクのアクセントボタン） */
+  .cta-link {
+    background-color: #ffffff;
+    color: var(--color-primary) !important;
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-link::after {
+    bottom: 4px;
+    height: 2.5px;
+    background-color: var(--color-accent);
+  }
+
+  .cta-link:hover {
+    background-color: var(--color-accent-soft);
+    color: #e05d84 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 153, 182, 0.3);
+  }
+
+  .cta-link.active {
+    background-color: #ffffff;
+    color: #e05d84 !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(255, 153, 182, 0.4);
+  }
+
+  .cta-link.active::after {
+    transform: translateX(-50%) scaleX(0.7);
+    background-color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .header-inner {
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+    }
+
+    .logo-wrap {
+      width: 130px;
+    }
+
+    .nav ul {
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-link {
+      font-size: 0.88rem;
+      padding: 0.25rem 0.5rem 0.4rem;
+    }
+  }
+</style>
