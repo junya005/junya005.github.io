@@ -1,0 +1,261 @@
+---
+import type { Project } from "../../types/project";
+import { getDetailUrl, resolveAssetUrl } from "../../utils/url";
+
+interface Props extends Partial<Project> {
+  id: string;
+  title: string;
+  description: string;
+  period: string;
+  projectPath: string;
+  thumbnailPath: string;
+}
+
+const {
+  id,
+  title,
+  description,
+  period,
+  duration,
+  role,
+  tags = [],
+  projectPath,
+  thumbnailPath,
+  techHighlight,
+  isFeatured = false,
+} = Astro.props;
+
+const detailUrl = getDetailUrl(id);
+const hasThumbnail = Boolean(thumbnailPath);
+const thumbnailUrl = resolveAssetUrl(thumbnailPath);
+---
+
+<article class="project-card" data-tags={tags.join(",")}>
+  {isFeatured && <div class="featured-ribbon">Featured</div>}
+
+  <a href={detailUrl} class="thumb-link" tabindex="-1" aria-hidden="true">
+    {
+      hasThumbnail ? (
+        <img
+          src={thumbnailUrl}
+          alt={title}
+          loading="lazy"
+          class="thumbnail-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="thumb-placeholder" style="display: none;">
+          <span class="placeholder-icon">🎮</span>
+          <span class="placeholder-title">{title}</span>
+        </div>
+      ) : (
+        <div class="thumb-placeholder">
+          <span class="placeholder-icon">🎮</span>
+          <span class="placeholder-title">{title}</span>
+        </div>
+      )
+    }
+  </a>
+
+  <div class="card-content">
+    <div class="tag-list">
+      {tags.map((tag) => (
+        <span class="badge-tag">{tag}</span>
+      ))}
+    </div>
+
+    <h3 class="card-title">
+      <a href={detailUrl}>{title}</a>
+    </h3>
+
+    <div class="card-meta">
+      <span class="meta-date">⏱ {duration || period}</span>
+      {role && <span class="meta-role">👤 {role}</span>}
+    </div>
+
+    <p class="card-desc">{description}</p>
+
+    {techHighlight && (
+      <div class="tech-snippet">
+        <span class="snippet-label">ポイント</span>
+        <span class="snippet-text">{techHighlight}</span>
+      </div>
+    )}
+
+    <div class="card-actions">
+      <a
+        href={projectPath}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary btn-card"
+      >
+        <span>▶ プレイ</span>
+      </a>
+      <a href={detailUrl} class="btn btn-outline btn-card">
+        <span>詳細 →</span>
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-sm);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(72, 184, 236, 0.4);
+  }
+
+  .featured-ribbon {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    background: var(--color-accent-soft);
+    color: #e05d84;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 153, 182, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .thumb-link {
+    display: block;
+    height: 180px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #eaf7fd 100%);
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .thumbnail-img {
+    transform: scale(1.05);
+  }
+
+  .thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e8f4fc 100%);
+  }
+
+  .placeholder-icon {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 4px rgba(72, 184, 236, 0.2));
+  }
+
+  .placeholder-title {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title a {
+    color: var(--color-text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.85rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .tech-snippet {
+    background-color: var(--color-primary-subtle);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .snippet-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+  }
+
+  .snippet-text {
+    font-size: 0.82rem;
+    color: var(--color-text-body);
+    line-height: 1.45;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .btn-card {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.84rem;
+    flex: 1;
+    text-align: center;
+  }
+</style>
