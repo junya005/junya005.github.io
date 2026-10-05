@@ -97,6 +97,11 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
+.btn-large {
+  padding: 0.9rem 2.2rem;
+  font-size: 1.05rem;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, var(--color-primary) 0%, #38a4d7 100%);
   color: #ffffff !important;
