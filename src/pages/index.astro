@@ -1,20 +1,910 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Profile from "../components/Profile.astro";
+import projects from "../data/projects.json";
+
+const rawBase = import.meta.env.BASE_URL;
+const baseUrl = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+
+// 代表作3選を抽出
+const featuredProjects = projects.filter((p) => p.isFeatured);
 ---
 
 <Layout title="Top">
-  <div class="container">
-    <h1>ポートフォリオ</h1>
-    <h3>過去に作った作品をまとめております。</h3>
-    <Profile />
-  </div>
+  <!-- 1. Hero セクション -->
+  <section class="hero-section">
+    <div class="hero-bg-clouds" aria-hidden="true">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Game Programmer / Client Engineer</span>
+      </div>
+      <h1 class="hero-title">
+        ゲームプログラマー<br />
+        <span class="highlight-text">小林 純也</span> のポートフォリオ
+      </h1>
+      <p class="hero-lead">
+        Unity と C# を軸に、ダンジョン自動生成などのアルゴリズムや物理シミュレーションの実装に情熱を注ぐ学生エンジニアです。
+        「触っていて心地よい挙動」と「堅牢なロジック設計」を大切にゲーム開発に取り組んでいます。
+      </p>
+      <div class="hero-actions">
+        <a href="#featured" class="btn btn-primary">
+          <span>代表作を見る</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+        </a>
+        <a href={`${baseUrl}works/`} class="btn btn-secondary">
+          <span>全作品一覧（{projects.length}本）</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Featured Works（代表作3選） -->
+  <section id="featured" class="section featured-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub">PICK UP WORKS</span>
+        <h2 class="section-title">代表作（Featured）</h2>
+        <p class="section-desc">
+          アルゴリズム、物理・数学演算、世界観の作り込みの観点から特に注力した3作品です。
+        </p>
+      </div>
+
+      <div class="featured-grid">
+        {
+          featuredProjects.map((project, index) => {
+            const detailUrl = `${baseUrl}detail/${project.id}/`;
+            const hasThumbnail = Boolean(project.thumbnailPath);
+            const thumbSrc = hasThumbnail ? `${baseUrl}${project.thumbnailPath}` : "";
+
+            return (
+              <article class="featured-card">
+                <div class="featured-badge">Featured #{index + 1}</div>
+                <div class="featured-thumb-wrap">
+                  {hasThumbnail ? (
+                    <img
+                      src={thumbSrc}
+                      alt={project.title}
+                      class="featured-thumb-img"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="thumb-placeholder">
+                      <span class="placeholder-icon">🎮</span>
+                      <span class="placeholder-title">{project.title}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div class="featured-body">
+                  <div class="card-tags">
+                    {project.tags.map((tag) => (
+                      <span class="badge-tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  <h3 class="featured-card-title">
+                    <a href={detailUrl}>{project.title}</a>
+                  </h3>
+
+                  <p class="featured-desc">{project.description}</p>
+
+                  <div class="highlight-box">
+                    <span class="highlight-label">技術ハイライト</span>
+                    <p class="highlight-content">{project.techHighlight}</p>
+                  </div>
+
+                  <div class="card-meta">
+                    <span class="meta-item">⏱ 期間: {project.duration}</span>
+                    <span class="meta-item">👤 {project.role}</span>
+                  </div>
+
+                  <div class="card-footer-actions">
+                    <a
+                      href={project.projectPath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-primary btn-sm"
+                    >
+                      <span>▶ WebGLでプレイ</span>
+                    </a>
+                    <a href={detailUrl} class="btn btn-outline btn-sm">
+                      <span>技術解説を読む →</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <div class="all-works-cta">
+        <a href={`${baseUrl}works/`} class="btn btn-secondary">
+          すべての作品（全 {projects.length} 件）を見る →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Skills セクション -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub">TECH STACK</span>
+        <h2 class="section-title">スキルセット</h2>
+        <p class="section-desc">
+          ゲーム制作とソフトウェア開発で使用している主な言語・技術・ツールです。
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- ゲーム開発 / 言語 -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <div class="cat-icon-wrap blue">🎮</div>
+            <div>
+              <h3 class="cat-title">ゲーム開発 & 言語</h3>
+              <p class="cat-subtitle">Game Development & Core</p>
+            </div>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">C#</span>
+                <span class="skill-tag">メイン言語</span>
+              </div>
+              <p class="skill-detail">
+                オブジェクト指向設計、ステートマシンパターン、イベント駆動処理、データ構造の基礎を理解し実装できます。
+              </p>
+            </li>
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">Unity (2D / 3D)</span>
+                <span class="skill-tag">エンジン</span>
+              </div>
+              <p class="skill-detail">
+                物理エンジン（Rigidbody/Collider）、アニメーション、UI（uGUI）、プレハブ設計、WebGLビルド展開の運用経験があります。
+              </p>
+            </li>
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">物理演算・アルゴリズム</span>
+                <span class="skill-tag">強み</span>
+              </div>
+              <p class="skill-detail">
+                放物線のリアルタイム軌道予測（重力・初速演算）、迷宮の空間自動分割（BSPTree）、重み付け確率抽選などを制作に適用しています。
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 開発環境 & ツール -->
+        <div class="skill-category-card">
+          <div class="cat-header">
+            <div class="cat-icon-wrap pink">🛠️</div>
+            <div>
+              <h3 class="cat-title">開発環境 & ツール</h3>
+              <p class="cat-subtitle">Environment & Tools</p>
+            </div>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">Git / GitHub</span>
+                <span class="skill-tag">バージョン管理</span>
+              </div>
+              <p class="skill-detail">
+                コミット・ブランチ運用、GitHub Pagesを利用したWebGLゲームのWebホスティング・自動公開フローを構築しています。
+              </p>
+            </li>
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">Blender</span>
+                <span class="skill-tag">3Dモデリング基礎</span>
+              </div>
+              <p class="skill-detail">
+                ゲーム内で使用するシンプルな3Dプロップやステージ用アセットの基本モデリング・UV展開・エクスポートを行えます。
+              </p>
+            </li>
+            <li class="skill-item">
+              <div class="skill-name-row">
+                <span class="skill-name">VS Code / IDE</span>
+                <span class="skill-tag">エディタ</span>
+              </div>
+              <p class="skill-detail">
+                拡張機能やAI支援ツール（生成AIでの寸法リサーチや設計相談）を適宜取り入れ、効率的な開発ワークフローを実践しています。
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. About Me セクション -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-sub">ABOUT ME</span>
+        <h2 class="section-title">私について</h2>
+      </div>
+
+      <div class="about-card">
+        <div class="about-profile-side">
+          <div class="avatar-wrap">
+            <img src={`${baseUrl}images/icons/avater.jpg`} alt="小林 純也" class="avatar-img" />
+          </div>
+          <h3 class="profile-name">小林 純也</h3>
+          <p class="profile-role">Junya Kobayashi</p>
+          <span class="profile-status-badge">就活・インターン活動中</span>
+        </div>
+
+        <div class="about-detail-side">
+          <div class="about-info-grid">
+            <div class="info-cell">
+              <span class="info-label">希望職種</span>
+              <span class="info-val">ゲームプログラマー / クライアントエンジニア</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">専攻</span>
+              <span class="info-val">専門学校 ゲーム開発専攻</span>
+            </div>
+            <div class="info-cell">
+              <span class="info-label">志向性</span>
+              <span class="info-val">アルゴリズム実装・ゲームプレイ挙動の追求</span>
+            </div>
+          </div>
+
+          <div class="about-text">
+            <h4>ゲームづくりへの思いとこだわり</h4>
+            <p>
+              現在、専門学校でゲーム開発を学んでいます。単にアセットを配置するだけでなく、
+              <strong>「なぜその挙動になるのか」「どうすればプレイヤーが手触りの良さを感じられるか」</strong>
+              を数学や物理のロジックに基づいてコードに落とし込むことに面白さを感じています。
+            </p>
+            <p>
+              ピンボールゲームでのフリッパー角度と初速の微調整や、放物線計算によるキャッチボールの軌道予測、ダンジョンの自動生成など、
+              自らの手で仕組みを一から組み上げる開発を得意としています。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Contact セクション -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="contact-card">
+        <span class="section-sub">GET IN TOUCH</span>
+        <h2 class="contact-title">お問い合わせ / リンク</h2>
+        <p class="contact-desc">
+          作品のソースコードや詳細、インターンシップ等のご連絡は以下よりお気軽にお願いいたします。
+        </p>
+
+        <div class="contact-links">
+          <a
+            href="https://github.com/junya005"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline contact-btn"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>GitHub (@junya005)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
   .container {
-    max-width: 1000px;
+    max-width: 1060px;
     margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* セクション共通 */
+  .section {
+    padding: 5rem 0;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 3rem;
+  }
+
+  .section-sub {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* 1. Hero セクション */
+  .hero-section {
+    position: relative;
+    padding: 5.5rem 0 4.5rem;
+    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .hero-bg-clouds {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .cloud {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .cloud-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(72, 184, 236, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .cloud-2 {
+    width: 320px;
+    height: 320px;
+    bottom: -50px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(255, 153, 182, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .cloud-3 {
+    width: 250px;
+    height: 250px;
+    top: 30%;
+    right: 20%;
+    background: radial-gradient(circle, rgba(72, 184, 236, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 820px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid rgba(72, 184, 236, 0.3);
+    padding: 0.35rem 1rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    box-shadow: var(--shadow-cloud-sm);
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(72, 184, 236, 0.2);
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .highlight-text {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #258fc3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-lead {
+    font-size: 1.12rem;
+    color: var(--color-text-body);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto 2.25rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* 2. Featured Works */
+  .featured-section {
+    background-color: var(--color-surface-cloud);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .featured-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-sm);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(72, 184, 236, 0.4);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .featured-thumb-wrap {
+    height: 180px;
+    background-color: #f1f8fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .featured-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-card:hover .featured-thumb-img {
+    transform: scale(1.04);
+  }
+
+  .thumb-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+  }
+
+  .placeholder-icon {
+    font-size: 2.5rem;
+  }
+
+  .placeholder-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .featured-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .featured-card-title a {
+    color: var(--color-text-main);
+  }
+
+  .featured-card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .featured-desc {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .highlight-box {
+    background-color: var(--color-primary-subtle);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.65rem 0.85rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .highlight-content {
+    font-size: 0.84rem;
+    color: var(--color-text-body);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.25rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .card-footer-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+  }
+
+  .btn-sm {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.84rem;
+    flex: 1;
+    text-align: center;
+  }
+
+  .all-works-cta {
+    text-align: center;
+  }
+
+  /* 3. Skills セクション */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .skill-category-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
     padding: 2rem;
+    box-shadow: var(--shadow-cloud-sm);
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .cat-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .cat-icon-wrap.blue {
+    background-color: var(--color-primary-light);
+  }
+
+  .cat-icon-wrap.pink {
+    background-color: var(--color-accent-soft);
+  }
+
+  .cat-title {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .cat-subtitle {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .skill-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-text-main);
+  }
+
+  .skill-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .skill-detail {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* 4. About Me セクション */
+  .about-section {
+    background-color: var(--color-surface-cloud);
+  }
+
+  .about-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-md);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    overflow: hidden;
+  }
+
+  .about-profile-side {
+    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid var(--color-border-light);
+  }
+
+  .avatar-wrap {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    padding: 4px;
+    background: #ffffff;
+    box-shadow: var(--shadow-cloud-md);
+    margin-bottom: 1.25rem;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .profile-name {
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .profile-role {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+  }
+
+  .profile-status-badge {
+    background-color: var(--color-accent-soft);
+    color: #e05d84;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 153, 182, 0.4);
+  }
+
+  .about-detail-side {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .info-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .info-val {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+  }
+
+  .about-text h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary);
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--color-text-body);
+    margin-bottom: 1rem;
+  }
+
+  .about-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 5. Contact セクション */
+  .contact-section {
+    background: #ffffff;
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, #eaf7fd 0%, #fff1f5 100%);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(72, 184, 236, 0.2);
+    padding: 3.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-cloud-md);
+  }
+
+  .contact-title {
+    font-size: 1.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-desc {
+    max-width: 550px;
+    margin: 0 auto 2rem;
+    color: var(--color-text-body);
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .contact-btn {
+    background: #ffffff !important;
+    padding: 0.75rem 1.75rem;
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 960px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-card {
+      grid-template-columns: 1fr;
+    }
+
+    .about-profile-side {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border-light);
+      padding: 2rem;
+    }
+
+    .about-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 2.1rem;
+    }
+
+    .hero-lead {
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
   }
 </style>
