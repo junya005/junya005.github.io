@@ -1,4 +1,7 @@
 ---
+import { getBaseUrl } from "../../utils/url";
+
+const baseUrl = getBaseUrl();
 ---
 
 <section id="skills" class="section skills-section">
@@ -82,22 +85,98 @@
           </li>
           <li class="skill-item">
             <div class="skill-name-row">
-              <span class="skill-name">VS Code / IDE</span>
+              <span class="skill-name">VS Code</span>
               <span class="skill-tag">エディタ</span>
             </div>
             <p class="skill-detail">
-              拡張機能やAI支援ツール（生成AIでの寸法リサーチや設計相談）を適宜取り入れ、効率的な開発ワークフローを実践しています。
+              C#拡張機能やデバッガ連携、フォーマッタ設定をカスタマイズし、快適でミスの少ないコーディング環境を整備しています。
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- AI活用 & ワークフロー -->
+      <div class="skill-category-card">
+        <div class="cat-header">
+          <div class="cat-icon-wrap purple">✨</div>
+          <div>
+            <h3 class="cat-title">AI活用 & ワークフロー</h3>
+            <p class="cat-subtitle">AI Tools & Modern Workflow</p>
+          </div>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">Antigravity</span>
+              <span class="skill-tag">AIエージェント</span>
+            </div>
+            <p class="skill-detail">
+              Google製AIコーディング環境を活用。自律型エージェントとの協調による実装高速化や、大規模リファクタリング、設計支援を実践しています。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">MCP (Model Context Protocol)</span>
+              <span class="skill-tag">ツール連携</span>
+            </div>
+            <p class="skill-detail">
+              Unity開発環境とAIモデルをMCPサーバー経由で直接接続。定型ロジックの実装自動化など、最新プロトコルをいち早く開発フローに導入しています。
+            </p>
+          </li>
+          <li class="skill-item">
+            <div class="skill-name-row">
+              <span class="skill-name">Perplexity / AIリサーチ</span>
+              <span class="skill-tag">情報収集・調査</span>
+            </div>
+            <p class="skill-detail">
+              ゲーム仕様の寸法リサーチや数式・アルゴリズム検証に活用。一次情報源の確認とAI検索を組み合わせ、信頼性の高い技術調査を行っています。
             </p>
           </li>
         </ul>
       </div>
     </div>
+
+    <!-- スキル詳細ページへの誘導CTA -->
+    <div class="all-skills-cta">
+      <p class="cta-note">各スキルの具体的な実装実績や関連ゲーム作品を掲載しています</p>
+      <a href={`${baseUrl}skills/`} class="btn btn-primary btn-large">
+        <span>詳しいスキル・関連制作実績を見る</span>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
   </div>
 </section>
 
 <style>
+  .all-skills-cta {
+    text-align: center;
+    padding-top: 1rem;
+  }
+
+  .cta-note {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-large {
+    padding: 0.85rem 2.2rem;
+    font-size: 1.05rem;
+  }
   .container {
-    max-width: 1060px;
+    max-width: 1140px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
@@ -134,35 +213,46 @@
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
   }
 
   .skill-category-card {
     background: #ffffff;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
-    padding: 2rem;
+    padding: 1.75rem;
     box-shadow: var(--shadow-cloud-sm);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .skill-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(72, 184, 236, 0.4);
   }
 
   .cat-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.75rem;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--color-border-light);
   }
 
   .cat-icon-wrap {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    flex-shrink: 0;
   }
 
   .cat-icon-wrap.blue {
@@ -173,13 +263,17 @@
     background-color: var(--color-accent-soft);
   }
 
+  .cat-icon-wrap.purple {
+    background-color: #f3e8ff;
+  }
+
   .cat-title {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     margin: 0;
   }
 
   .cat-subtitle {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: var(--color-text-muted);
     margin: 0;
   }
@@ -190,7 +284,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.35rem;
   }
 
   .skill-item {
@@ -203,33 +297,38 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
   }
 
   .skill-name {
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     color: var(--color-text-main);
   }
 
   .skill-tag {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--color-primary);
     background: var(--color-primary-light);
-    padding: 0.15rem 0.6rem;
+    padding: 0.15rem 0.55rem;
     border-radius: var(--radius-pill);
+    white-space: nowrap;
   }
 
   .skill-detail {
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     color: var(--color-text-muted);
     line-height: 1.6;
     margin: 0;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1024px) {
     .skills-grid {
       grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
     }
   }
 </style>
