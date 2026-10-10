@@ -1,9 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ui/ProjectCard.astro";
+import Breadcrumb from "../components/ui/Breadcrumb.astro";
 import projectsData from "../data/projects.json";
 import type { Project } from "../types/project";
+import { getBaseUrl } from "../utils/url";
 
+const baseUrl = getBaseUrl();
 const projects = projectsData as Project[];
 
 // ユニークなタグ一覧を抽出
@@ -27,6 +30,12 @@ const filterCategories = [
   description="小林 純也 が制作したUnityゲーム作品一覧。2D/3Dアクション、物理演算、アルゴリズム実装などの作品を掲載しています。"
 >
   <div class="works-page">
+    <Breadcrumb
+      items={[
+        { label: "Top", href: baseUrl },
+        { label: "Works" },
+      ]}
+    />
     <div class="works-header">
       <div class="container">
         <span class="section-sub">PORTFOLIO</span>

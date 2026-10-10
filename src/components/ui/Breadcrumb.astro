@@ -1,0 +1,93 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  maxWidth?: string;
+}
+
+const { items, maxWidth = "1060px" } = Astro.props;
+---
+
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-container" style={`max-width: ${maxWidth};`}>
+    <ol class="breadcrumb-list">
+      {
+        items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (
+            <li class="breadcrumb-item">
+              {index > 0 && (
+                <span class="sep" aria-hidden="true">
+                  /
+                </span>
+              )}
+              {isLast || !item.href ? (
+                <span class="current" aria-current={isLast ? "page" : undefined}>
+                  {item.label}
+                </span>
+              ) : (
+                <a href={item.href} class="breadcrumb-link">
+                  {item.label}
+                </a>
+              )}
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</nav>
+
+<style>
+  .breadcrumb-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+    font-size: 0.88rem;
+  }
+
+  .breadcrumb-container {
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .breadcrumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .sep {
+    color: var(--color-text-light);
+    user-select: none;
+  }
+
+  .current {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+</style>
