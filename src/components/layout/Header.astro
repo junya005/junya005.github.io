@@ -241,13 +241,19 @@ const baseUrl = getBaseUrl();
     box-shadow: 0 4px 12px rgba(255, 153, 182, 0.3);
   }
 
+  .cta-link:hover::after {
+    transform: translateX(-50%) scaleX(0.6);
+    background-color: var(--color-accent);
+  }
+
   .cta-link.active {
     background-color: #ffffff;
     color: #e05d84 !important;
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(255, 153, 182, 0.4);
   }
 
-  .cta-link.active::after {
+  .cta-link.active::after,
+  .cta-link.active:hover::after {
     transform: translateX(-50%) scaleX(0.7);
     background-color: var(--color-accent);
   }
