@@ -1,0 +1,653 @@
+---
+import Layout from "../layouts/Layout.astro";
+import skillsData from "../data/skills.json";
+import projectsData from "../data/projects.json";
+import type { Skill } from "../types/skill";
+import type { Project } from "../types/project";
+import { getBaseUrl, getDetailUrl, resolveAssetUrl } from "../utils/url";
+
+const skills = skillsData as Skill[];
+const projects = projectsData as Project[];
+const baseUrl = getBaseUrl();
+
+// カテゴリ別タブ定義
+const categories = [
+  { id: "all", label: "すべて" },
+  { id: "game", label: "ゲーム開発 & 言語" },
+  { id: "tool", label: "開発環境 & ツール" },
+  { id: "ai", label: "AI活用 & ワークフロー" },
+];
+---
+
+<Layout
+  title="スキル詳細 & 制作実績"
+  description="小林 純也 の保有スキル一覧。C#、Unity、自作物理演算、AI開発ツール（Antigravity, MCP）などの実装実績、今後の挑戦目標、および関連する制作ゲーム作品一覧です。"
+>
+  <div class="skills-page">
+    <!-- パンくずリスト -->
+    <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+      <div class="container breadcrumb-inner">
+        <a href={baseUrl}>Top</a>
+        <span class="sep">/</span>
+        <span class="current">Skills</span>
+      </div>
+    </nav>
+
+    <!-- ページヘッダー -->
+    <header class="page-header">
+      <div class="container">
+        <span class="section-sub">TECH & CAPABILITIES</span>
+        <h1 class="page-title">スキル詳細 & 制作実績</h1>
+        <p class="page-lead">
+          UnityおよびC#を軸としたゲーム開発スキル、制作環境、およびAIを活用したモダンワークフローの詳細です。<br />
+          単なる自己評価にとどまらず、<strong>「具体的に何ができるか」「どの作品で使用したか」「今後何を学ぶか」</strong>をまとめています。
+        </p>
+
+        <!-- カテゴリタブ -->
+        <div class="filter-buttons" role="tablist">
+          {
+            categories.map((cat, index) => (
+              <button
+                type="button"
+                class={`filter-btn ${index === 0 ? "active" : ""}`}
+                data-filter={cat.id}
+                role="tab"
+                aria-selected={index === 0 ? "true" : "false"}
+              >
+                {cat.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container skills-main">
+      <div class="skills-list" id="skills-list">
+        {
+          skills.map((skill) => {
+            // 関連作品データの取得
+            const relatedProjects = projects.filter((p) =>
+              skill.relatedProjectIds.includes(p.id)
+            );
+
+            return (
+              <article
+                class="skill-detail-card"
+                data-category={skill.category}
+                id={`skill-${skill.id}`}
+              >
+                <!-- カード上部ヘッダー -->
+                <div class="card-header">
+                  <div class="header-main">
+                    <span class={`category-badge badge-${skill.category}`}>
+                      {skill.categoryLabel}
+                    </span>
+                    <div class="title-row">
+                      <h2 class="skill-name">{skill.name}</h2>
+                      <span class="skill-tag">{skill.tag}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="skill-desc">{skill.description}</p>
+
+                <!-- できること・実装実績 -->
+                <div class="capabilities-section">
+                  <h3 class="section-heading">
+                    <span class="heading-icon">✓</span>
+                    <span>できること・実装実績</span>
+                  </h3>
+                  <ul class="capability-list">
+                    {skill.capabilities.map((cap) => (
+                      <li class="capability-item">{cap}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <!-- 今後の学習目標・挑戦したい技術 -->
+                {skill.futureGoals && (
+                  <div class="goals-box">
+                    <div class="goals-header">
+                      <span class="goals-icon">🎯</span>
+                      <span class="goals-title">今後の学習目標・挑戦したい技術</span>
+                    </div>
+                    <p class="goals-text">{skill.futureGoals}</p>
+                  </div>
+                )}
+
+                <!-- 関連作品（エビデンスへの逆引き） -->
+                <div class="related-section">
+                  <h3 class="section-heading">
+                    <span class="heading-icon">🎮</span>
+                    <span>この技術を使った制作ゲーム（{relatedProjects.length}件）</span>
+                  </h3>
+
+                  {relatedProjects.length > 0 ? (
+                    <div class="related-grid">
+                      {relatedProjects.map((proj) => {
+                        const detailUrl = getDetailUrl(proj.id);
+                        const hasThumb = Boolean(proj.thumbnailPath);
+                        const thumbSrc = resolveAssetUrl(proj.thumbnailPath);
+
+                        return (
+                          <div class="related-project-item">
+                            <div class="related-thumb-wrap">
+                              {hasThumb ? (
+                                <img
+                                  src={thumbSrc}
+                                  alt={proj.title}
+                                  class="related-thumb"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <div class="related-thumb-placeholder">🎮</div>
+                              )}
+                            </div>
+                            <div class="related-info">
+                              <span class="related-title">{proj.title}</span>
+                              <div class="related-links">
+                                <a href={detailUrl} class="link-btn link-detail">
+                                  技術解説 →
+                                </a>
+                                <a
+                                  href={proj.projectPath}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  class="link-btn link-play"
+                                >
+                                  プレイ
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p class="related-empty">
+                      制作環境全体または全プロジェクトの開発基盤として使用しています。
+                    </p>
+                  )}
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+
+      <!-- 下部ナビゲーション -->
+      <div class="bottom-actions">
+        <a href={baseUrl} class="btn btn-outline">
+          ← トップページに戻る
+        </a>
+        <a href={`${baseUrl}works/`} class="btn btn-secondary">
+          すべての作品一覧を見る →
+        </a>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  function setupSkillFilter() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const skillCards = document.querySelectorAll<HTMLElement>(".skill-detail-card");
+
+    function applyFilter(category: string) {
+      skillCards.forEach((card) => {
+        const cardCat = card.dataset.category;
+        if (category === "all" || cardCat === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      filterButtons.forEach((btn) => {
+        const isActive = btn.dataset.filter === category;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const cat = btn.dataset.filter || "all";
+        applyFilter(cat);
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupSkillFilter);
+  document.addEventListener("astro:page-load", setupSkillFilter);
+</script>
+
+<style>
+  .skills-page {
+    background-color: var(--color-surface-cloud);
+    min-height: calc(100vh - 160px);
+    padding-bottom: 5rem;
+  }
+
+  .container {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* パンくずリスト */
+  .breadcrumb-bar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.75rem 0;
+    font-size: 0.88rem;
+  }
+
+  .breadcrumb-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-inner a {
+    color: var(--color-primary);
+  }
+
+  .breadcrumb-inner .sep {
+    color: var(--color-text-light);
+  }
+
+  .breadcrumb-inner .current {
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  /* ページヘッダー */
+  .page-header {
+    background: linear-gradient(180deg, #f0f9ff 0%, var(--color-surface-cloud) 100%);
+    padding: 3.5rem 0 2rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .section-sub {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .page-title {
+    font-size: 2.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .page-lead {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  /* フィルタタブボタン */
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .filter-btn {
+    background: #ffffff;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text-body);
+    padding: 0.45rem 1.15rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-cloud-sm);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #35a5db 100%);
+    border-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(72, 184, 236, 0.35);
+  }
+
+  /* メインスキルリスト */
+  .skills-main {
+    padding-top: 3rem;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  /* スキル詳細カード */
+  .skill-detail-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-cloud-sm);
+    padding: 2.25rem;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+
+  .skill-detail-card:hover {
+    box-shadow: var(--shadow-cloud-md);
+    border-color: rgba(72, 184, 236, 0.35);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .category-badge {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.65rem;
+    border-radius: var(--radius-pill);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-game {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .badge-tool {
+    background-color: var(--color-accent-soft);
+    color: #e05d84;
+  }
+
+  .badge-ai {
+    background-color: #f3e8ff;
+    color: #8b5cf6;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .skill-name {
+    font-size: 1.6rem;
+    margin: 0;
+    color: var(--color-text-main);
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .skill-desc {
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+  }
+
+  /* セクション小見出し */
+  .section-heading {
+    font-size: 1.05rem;
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-text-main);
+  }
+
+  .heading-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* できることリスト */
+  .capabilities-section {
+    margin-bottom: 1.75rem;
+  }
+
+  .capability-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .capability-item {
+    background-color: var(--color-surface-cloud);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-body);
+    line-height: 1.5;
+    position: relative;
+    padding-left: 1.8rem;
+  }
+
+  .capability-item::before {
+    content: "•";
+    position: absolute;
+    left: 0.8rem;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  /* 今後の目標ボックス */
+  .goals-box {
+    background: linear-gradient(135deg, #f0f9ff 0%, #fff6f8 100%);
+    border: 1px solid rgba(72, 184, 236, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .goals-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .goals-icon {
+    font-size: 1rem;
+  }
+
+  .goals-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .goals-text {
+    font-size: 0.92rem;
+    color: var(--color-text-body);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 関連作品グリッド */
+  .related-section {
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .related-project-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+    box-shadow: var(--shadow-cloud-sm);
+    transition: all 0.2s ease;
+  }
+
+  .related-project-item:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-cloud-md);
+  }
+
+  .related-thumb-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: #f1f8fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .related-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .related-thumb-placeholder {
+    font-size: 1.2rem;
+  }
+
+  .related-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .related-title {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .related-links {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .link-btn {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .link-detail {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+  }
+
+  .link-detail:hover {
+    background-color: #d8f0fa;
+  }
+
+  .link-play {
+    color: var(--color-text-muted);
+    background-color: var(--color-surface-cloud);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .link-play:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .related-empty {
+    font-size: 0.88rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* 下部アクションボタン */
+  .bottom-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .capability-list {
+      grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skill-detail-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

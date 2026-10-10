@@ -1,0 +1,183 @@
+[
+  {
+    "id": "csharp",
+    "name": "C#",
+    "category": "game",
+    "categoryLabel": "ゲーム開発 & 言語",
+    "tag": "メイン言語",
+    "description": "ゲームロジックおよびアルゴリズム実装の中心言語です。",
+    "capabilities": [
+      "オブジェクト指向プログラミング（カプセル化・継承・ポリモーフィズム）の活用",
+      "ステートマシンパターンを用いた状態遷移・ゲームループ管理",
+      "イベント駆動アーキテクチャ（C# Action / UnityEvent）による疎結合設計",
+      "物理・数学演算（放物線軌道予測、乱数制御、二分木アルゴリズム）の実装"
+    ],
+    "futureGoals": "非同期処理（UniTask）の高度な活用や、メモリ最適化・GCアロケーション抑制の探求",
+    "relatedProjectIds": [
+      "game-lilys-mystery-labyrinth",
+      "game-catch-ball",
+      "game-cloud-pinball",
+      "game-3d-shooting",
+      "game-rolling-ball-3d",
+      "game-ore-clicker",
+      "game-kami-sumo",
+      "game-pinball"
+    ]
+  },
+  {
+    "id": "unity",
+    "name": "Unity (2D / 3D)",
+    "category": "game",
+    "categoryLabel": "ゲーム開発 & 言語",
+    "tag": "エンジン",
+    "description": "2D・3Dゲームの総合制作環境として日常的に使用しています。",
+    "capabilities": [
+      "Rigidbody / Collider を用いた物理演算と当たり判定制御",
+      "Rigidbodyを使わない自作物理挙動・等加速度移動処理の実装",
+      "uGUI によるレスポンシブなゲーム内UI・HUD構築",
+      "Cinemachine を用いた動的カメラワークの演出",
+      "WebGLプラットフォーム向けビルドおよびWeb展開"
+    ],
+    "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URPの高度なレンダリング調整",
+    "relatedProjectIds": [
+      "game-lilys-mystery-labyrinth",
+      "game-catch-ball",
+      "game-cloud-pinball",
+      "game-3d-shooting",
+      "game-rolling-ball-3d",
+      "game-ore-clicker",
+      "game-kami-sumo",
+      "game-pinball"
+    ]
+  },
+  {
+    "id": "algorithms",
+    "name": "物理演算・アルゴリズム",
+    "category": "game",
+    "categoryLabel": "ゲーム開発 & 言語",
+    "tag": "強み",
+    "description": "「手触りの良さ」と「仕組みの面白さ」を数学的ロジックから追求しています。",
+    "capabilities": [
+      "等加速度運動・放物線のリアルタイム軌道予測線の数式実装",
+      "穴掘り法（迷路自動生成）によるプロシージャルダンジョン構築",
+      "重み付け確率抽選アルゴリズムによるガチャシステム設計",
+      "クォータニオンを用いた3D回転・物理剛体シミュレーション制御"
+    ],
+    "futureGoals": "A*アルゴリズム等の経路探索、群衆シミュレーション、ネット対戦における同期予測",
+    "relatedProjectIds": [
+      "game-catch-ball",
+      "game-lilys-mystery-labyrinth",
+      "game-cloud-pinball",
+      "game-ore-clicker",
+      "game-rolling-ball-3d"
+    ]
+  },
+  {
+    "id": "git",
+    "name": "Git / GitHub",
+    "category": "tool",
+    "categoryLabel": "開発環境 & ツール",
+    "tag": "バージョン管理",
+    "description": "安全なソースコード管理とWeb公開パイプラインを運用しています。",
+    "capabilities": [
+      "ブランチ運用（feature / main）と意味のあるコミット履歴の管理",
+      "GitHub Pages を利用した WebGL ゲームおよびポートフォリオの自動デプロイ",
+      "プルリクエストベースの開発フローと変更管理"
+    ],
+    "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）の導入",
+    "relatedProjectIds": [
+      "game-cloud-pinball",
+      "game-lilys-mystery-labyrinth",
+      "game-catch-ball"
+    ]
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "category": "tool",
+    "categoryLabel": "開発環境 & ツール",
+    "tag": "3Dモデリング基礎",
+    "description": "ゲームプログラミングに必要な3Dアセットの自作・調整を行っています。",
+    "capabilities": [
+      "シンプルなプロップ・ステージ用オブジェクトのローポリモデリング",
+      "UV展開および基本的なテクスチャマッピング",
+      "FBXエクスポートとUnityインポート・マテリアル連携"
+    ],
+    "futureGoals": "ボーンリギングと基本的なキャラクタアニメーション作成の習得",
+    "relatedProjectIds": [
+      "game-rolling-ball-3d",
+      "game-3d-shooting",
+      "game-kami-sumo"
+    ]
+  },
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "category": "tool",
+    "categoryLabel": "開発環境 & ツール",
+    "tag": "エディタ",
+    "description": "快適でミスの少ないコーディング環境を整えています。",
+    "capabilities": [
+      "C# Dev Kit 等の拡張機能導入と Unity エディタデバッグ連携",
+      "フォーマッタ・リンター設定によるコード品質保持",
+      "ショートカットやスニペットによる高速コーディング"
+    ],
+    "futureGoals": "カスタムスニペットの拡充や開発用タスク自動化",
+    "relatedProjectIds": []
+  },
+  {
+    "id": "antigravity",
+    "name": "Antigravity",
+    "category": "ai",
+    "categoryLabel": "AI活用 & ワークフロー",
+    "tag": "AIエージェント",
+    "description": "Google製自律型コーディング環境を開発パートナーとして活用しています。",
+    "capabilities": [
+      "エージェントとのペアプログラミングによる実装速度の大幅な向上",
+      "大規模コードベースのリファクタリング（3層アーキテクチャ再編等）の迅速な実行",
+      "アーキテクチャ設計やエラー原因調査の多角的壁打ち"
+    ],
+    "futureGoals": "自作カスタムスキル（Skills）の定義によるプロジェクト固有ワークフローの完全自動化",
+    "relatedProjectIds": [
+      "game-lilys-mystery-labyrinth",
+      "game-catch-ball",
+      "game-cloud-pinball"
+    ]
+  },
+  {
+    "id": "mcp",
+    "name": "MCP (Model Context Protocol)",
+    "category": "ai",
+    "categoryLabel": "AI活用 & ワークフロー",
+    "tag": "ツール連携",
+    "description": "AIモデルと開発環境を直接繋ぐ最新プロトコルを実制作に組み込んでいます。",
+    "capabilities": [
+      "Unity MCP サーバー経由でのエディタ操作・アセット情報取得の連携",
+      "定型作業やボイラープレートコード生成の自動化パイプライン構築",
+      "ファイルシステム操作や外部ツールのエージェント統合"
+    ],
+    "futureGoals": "自作MCPサーバーの実装による独自開発ツールのエージェント連携",
+    "relatedProjectIds": [
+      "game-lilys-mystery-labyrinth",
+      "game-catch-ball"
+    ]
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity / AIリサーチ",
+    "category": "ai",
+    "categoryLabel": "AI活用 & ワークフロー",
+    "tag": "情報収集・調査",
+    "description": "一次情報とAI検索を組み合わせ、信頼性の高い技術調査を能動的に行っています。",
+    "capabilities": [
+      "ピンボール筐体の実寸法やゲーム仕様の迅速なリサーチと検証",
+      "数式・物理アルゴリズムの先行実装例やドキュメントの比較調査",
+      "最新技術動向の素早いキャッチアップと制作への導入判断"
+    ],
+    "futureGoals": "技術調査結果の社内・チーム向けナレッジドキュメント化の習慣づけ",
+    "relatedProjectIds": [
+      "game-cloud-pinball",
+      "game-catch-ball"
+    ]
+  }
+]
