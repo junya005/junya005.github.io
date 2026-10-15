@@ -85,6 +85,23 @@
     "githubUrl": "https://github.com/junya005/tech.c_gr.3_sat56_1st.sem_tobasu"
   },
   {
+    "id": "game-builkour",
+    "category": "game",
+    "title": "Builkour",
+    "description": "産学提携プロジェクトで制作したVket Cloudワールド。プレイヤー自身が操作盤から空間に足場を出現・配置させ、進むべきルートを組み立てながら跳破するパルクールを企画・実装",
+    "period": "2024/6/13 - 2024/7/4",
+    "duration": "約3週間",
+    "role": "ワールド企画 / スクリプト実装（産学提携プロジェクト）",
+    "tags": ["Vket Cloud", "HeliScript", "3D", "メタバース", "産学提携"],
+    "isFeatured": false,
+    "techHighlight": "プレイヤー自身が足場を作って跳ぶ動的足場生成ギミック、独自言語HeliScriptによるHEOノード制御、公式仕様書の読解・実装力",
+    "platform": "Webブラウザ (Vket Cloud)",
+    "engine": "Vket Cloud SDK / HeliScript",
+    "thumbnailPath": "",
+    "projectPath": "",
+    "githubUrl": "https://github.com/junya005/builkour"
+  },
+  {
     "id": "game-catch-ball",
     "category": "game",
     "title": "キャッチボール",
