@@ -20,6 +20,7 @@ const filterCategories = [
   { id: "featured", label: "代表作 (Featured)" },
   { id: "3D", label: "3D作品" },
   { id: "2D", label: "2D作品" },
+  { id: "C++", label: "C++作品" },
   { id: "アルゴリズム", label: "アルゴリズム" },
   { id: "物理演算", label: "物理演算" },
 ];
@@ -27,7 +28,7 @@ const filterCategories = [
 
 <Layout
   title="作品一覧 (Works)"
-  description="小林 純也 が制作したUnityゲーム作品一覧。2D/3Dアクション、物理演算、アルゴリズム実装などの作品を掲載しています。"
+  description="小林 純也 が制作したゲームプログラミング作品一覧。Unity/C#やC++/SDL2による2D/3Dアクション、物理演算、アルゴリズム実装などの作品を掲載しています。"
 >
   <div class="works-page">
     <Breadcrumb
@@ -41,8 +42,8 @@ const filterCategories = [
         <span class="section-sub">PORTFOLIO</span>
         <h1 class="page-title">制作実績・作品一覧</h1>
         <p class="page-lead">
-          UnityおよびC#を用いて制作したゲーム作品（全 {projects.length} 件）です。<br />
-          気になる技術やジャンルで絞り込んでご覧いただけます。全作品ブラウザ上で直接プレイ可能です。
+          Unity/C# および C++/SDL2（自作エンジン）を用いて制作したゲーム作品（全 {projects.length} 件）です。<br />
+          気になる技術や言語・ジャンルで絞り込んでご覧いただけます。
         </p>
 
         <!-- タグフィルター -->
