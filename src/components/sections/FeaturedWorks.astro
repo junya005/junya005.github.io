@@ -70,14 +70,16 @@ const baseUrl = getBaseUrl();
                 </div>
 
                 <div class="card-footer-actions">
-                  <a
-                    href={project.projectPath}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-primary btn-sm"
-                  >
-                    <span>▶ WebGLでプレイ</span>
-                  </a>
+                  {project.projectPath && (
+                    <a
+                      href={project.projectPath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-primary btn-sm"
+                    >
+                      <span>▶ WebGLでプレイ</span>
+                    </a>
+                  )}
                   <a href={detailUrl} class="btn btn-outline btn-sm">
                     <span>技術解説を読む →</span>
                   </a>

@@ -22,6 +22,10 @@ export interface Project {
   isFeatured?: boolean;
   /** 技術ハイライト・こだわり要約 */
   techHighlight?: string;
+  /** プラットフォーム (例: "PC WebGL (ブラウザ実行)", "Nintendo Switch") */
+  platform?: string;
+  /** 使用エンジン / 言語 (例: "Unity / C#") */
+  engine?: string;
   /** サムネイル画像パス (public/ からの相対パス) */
   thumbnailPath: string;
   /** WebGLゲーム実行URL */
