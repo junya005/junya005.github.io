@@ -151,5 +151,22 @@
     "thumbnailPath": "images/thumbnails/ToyPair_Icon.png",
     "projectPath": "",
     "githubUrl": "https://github.com/junya005"
+  },
+  {
+    "id": "game-batotte-channel",
+    "category": "game",
+    "title": "バトってチャンネル！！",
+    "description": "テレビのリモコンを巡るチャンネル争いをテーマにした2人対戦型リズムアクション。進級制作展およびTGS出展作品",
+    "period": "2025/4 - 2025/9",
+    "duration": "約5カ月",
+    "role": "メインプログラミング（チーム開発）",
+    "tags": ["Unity", "2D", "リズムゲーム", "Live2D", "C#"],
+    "isFeatured": false,
+    "techHighlight": "ノーツ判定＆BPM同期コアエンジン、リアルタイム主導権スコアリング、UniTask非同期チュートリアル、展示適応アスペクト固定",
+    "platform": "PC (Windows / 展示環境)",
+    "engine": "Unity (URP 2D) / C#",
+    "thumbnailPath": "images/thumbnails/BatotteChannel_logo.png",
+    "projectPath": "",
+    "githubUrl": "https://github.com/junya005/GameProject2025_BatotteChannel"
   }
 ]
