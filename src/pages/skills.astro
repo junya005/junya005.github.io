@@ -150,14 +150,16 @@ const categories = [
                                 <a href={detailUrl} class="link-btn link-detail">
                                   技術解説 →
                                 </a>
-                                <a
-                                  href={proj.projectPath}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  class="link-btn link-play"
-                                >
-                                  プレイ
-                                </a>
+                                {proj.projectPath && (
+                                  <a
+                                    href={proj.projectPath}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="link-btn link-play"
+                                  >
+                                    プレイ
+                                  </a>
+                                )}
                               </div>
                             </div>
                           </div>

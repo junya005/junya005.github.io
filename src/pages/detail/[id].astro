@@ -77,11 +77,11 @@ const githubUrl = projectMeta?.githubUrl;
           </div>
           <div class="spec-item">
             <span class="spec-label">プラットフォーム</span>
-            <span class="spec-value">PC WebGL (ブラウザ実行)</span>
+            <span class="spec-value">{projectMeta?.platform || "PC WebGL (ブラウザ実行)"}</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">使用エンジン / 言語</span>
-            <span class="spec-value">Unity / C#</span>
+            <span class="spec-value">{projectMeta?.engine || "Unity / C#"}</span>
           </div>
         </div>
 
@@ -94,7 +94,7 @@ const githubUrl = projectMeta?.githubUrl;
 
         <!-- アクションボタン -->
         <div class="meta-actions">
-          {playUrl && (
+          {playUrl ? (
             <a
               href={playUrl}
               target="_blank"
@@ -106,6 +106,13 @@ const githubUrl = projectMeta?.githubUrl;
               </svg>
               <span>ブラウザで今すぐプレイ (WebGL)</span>
             </a>
+          ) : (
+            <div class="non-webgl-notice">
+              <span class="notice-badge">🎮 {projectMeta?.platform || "実機"}専用タイトル</span>
+              <span class="notice-text">
+                ※ブラウザ実行版（WebGL）は非公開です。下記の技術解説やコードプレビューをご覧ください。
+              </span>
+            </div>
           )}
           {githubUrl && (
             <a
@@ -143,6 +150,60 @@ const githubUrl = projectMeta?.githubUrl;
     </div>
   </div>
 </Layout>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script is:inline>
+  async function initMermaid() {
+    // 1. mermaidライブラリの読み込み完了を待機
+    if (typeof mermaid === "undefined") {
+      await new Promise((resolve) => {
+        let attempts = 0;
+        const interval = setInterval(() => {
+          attempts++;
+          if (typeof mermaid !== "undefined" || attempts > 60) {
+            clearInterval(interval);
+            resolve();
+          }
+        }, 50);
+      });
+    }
+
+    if (typeof mermaid === "undefined") return;
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "neutral",
+      securityLevel: "loose",
+      fontFamily: "Noto Sans JP, Outfit, sans-serif",
+    });
+
+    // 2. Astro(Shiki)が出力する data-language="mermaid" をセレクタに指定
+    const codeBlocks = document.querySelectorAll('pre[data-language="mermaid"]');
+    if (codeBlocks.length === 0) return;
+
+    for (const pre of codeBlocks) {
+      // Shikiで装飾されたタグを除いた純粋なテキストを取り出し
+      const code = pre.textContent || "";
+      const container = document.createElement("div");
+      container.className = "mermaid-diagram mermaid";
+      container.textContent = code;
+      pre.parentNode?.replaceChild(container, pre);
+    }
+
+    // 3. mermaid.run() で一括レンダリング
+    await mermaid.run({
+      querySelector: ".mermaid-diagram",
+    });
+  }
+
+  // 初回読み込みおよびAstroページロードに対応
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMermaid);
+  } else {
+    initMermaid();
+  }
+  document.addEventListener("astro:page-load", initMermaid);
+</script>
 
 <style>
   .detail-page {
@@ -267,6 +328,29 @@ const githubUrl = projectMeta?.githubUrl;
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
+    align-items: center;
+  }
+
+  .non-webgl-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    background-color: var(--color-surface-cloud);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .notice-badge {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .notice-text {
+    color: var(--color-text-muted);
   }
 
   /* 2. 本文カード */
