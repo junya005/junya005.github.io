@@ -168,5 +168,22 @@
     "thumbnailPath": "images/thumbnails/BatotteChannel_logo.png",
     "projectPath": "",
     "githubUrl": "https://github.com/junya005/GameProject2025_BatotteChannel"
+  },
+  {
+    "id": "game-stardrop",
+    "category": "game",
+    "title": "Star Drop",
+    "description": "星を集めながら飛来するUFOをヒップドロップで撃退する2Dカジュアルアクション。素材（ドット絵・SE）も全て自作しunityroomに公開",
+    "period": "2025",
+    "duration": "約1カ月",
+    "role": "企画 / プログラミング / 素材制作（個人開発）",
+    "tags": ["Unity", "2D", "アクション", "自作素材", "C#"],
+    "isFeatured": false,
+    "techHighlight": "ヒップドロップの予備動作とヒットストップによる爽快感演出、SOLID原則に基づくインターフェース分離設計、unityroom公開",
+    "platform": "PC WebGL (unityroom)",
+    "engine": "Unity (URP 2D) / C#",
+    "thumbnailPath": "images/thumbnails/StarDrop_Icon.gif",
+    "projectPath": "https://unityroom.com/games/star_drop",
+    "githubUrl": "https://github.com/junya005/Unity_StarDrop"
   }
 ]
