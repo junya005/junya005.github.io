@@ -68,6 +68,23 @@
     "githubUrl": "https://github.com/junya005/Unity_LilysMysteryLabyrinth"
   },
   {
+    "id": "game-parabolic-bomber",
+    "category": "game",
+    "title": "Parabolic Bomber",
+    "description": "学校の企画選択授業で制作した、C++とSDL2による2人対戦型アクションゲーム。爆弾を投げ合い相手を画面外へ吹き飛ばす対戦ロジックと自作ミニエンジンを実装",
+    "period": "2026/7/4 - 2026/7/24",
+    "duration": "約3週間",
+    "role": "プログラミング / 自作エンジン設計（個人開発・授業課題）",
+    "tags": ["C++", "SDL2", "2D", "自作エンジン", "CMake"],
+    "isFeatured": false,
+    "techHighlight": "SDL2によるゼロからのゲームループ構築、Window・Renderer・Inputを共通化した自作ミニエンジン、AABB矩形当たり判定とノックバック物理",
+    "platform": "PC (Windows)",
+    "engine": "C++ (C++23) / SDL2 (自作エンジン)",
+    "thumbnailPath": "images/thumbnails/ParabolicBomber_bomb.png",
+    "projectPath": "",
+    "githubUrl": "https://github.com/junya005/tech.c_gr.3_sat56_1st.sem_tobasu"
+  },
+  {
     "id": "game-catch-ball",
     "category": "game",
     "title": "キャッチボール",
