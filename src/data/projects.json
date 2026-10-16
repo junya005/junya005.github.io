@@ -102,6 +102,23 @@
     "githubUrl": "https://github.com/junya005/builkour"
   },
   {
+    "id": "game-justcoffee",
+    "category": "game",
+    "title": "Just Coffee",
+    "description": "株式会社FlyPenguinのミニゲーム投稿プラットフォーム「Minute Games」β版向けに制作した産学提携作品。目標ラインぴったりにコーヒーを注ぐシンプルかつ奥深いカジュアルゲーム",
+    "period": "2024/11 - 2025/2",
+    "duration": "約2カ月",
+    "role": "メインプログラミング / 企画（産学提携プロジェクト）",
+    "tags": ["Unity", "2D", "カジュアル", "産学提携", "C#"],
+    "isFeatured": false,
+    "techHighlight": "ボタン長押しによる精密な水位上昇・スケール制御、mm・μm単位の極小誤差スコアリング、Minute Gamesプラットフォーム対応",
+    "platform": "Web (Minute Games β版 / WebGL)",
+    "engine": "Unity / C#",
+    "thumbnailPath": "images/thumbnails/JustCoffee_logo.png",
+    "projectPath": "https://youtube.com/shorts/sb1fTAfvlss?feature=share",
+    "githubUrl": "https://github.com/junya005/JustCoffee"
+  },
+  {
     "id": "game-catch-ball",
     "category": "game",
     "title": "キャッチボール",
