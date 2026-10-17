@@ -4,6 +4,7 @@ import { getDetailUrl, resolveAssetUrl } from "../../utils/url";
 
 interface Props extends Partial<Project> {
   id: string;
+  category?: string;
   title: string;
   description: string;
   period: string;
@@ -13,6 +14,7 @@ interface Props extends Partial<Project> {
 
 const {
   id,
+  category = "game",
   title,
   description,
   period,
@@ -29,6 +31,8 @@ const detailUrl = getDetailUrl(id);
 const hasThumbnail = Boolean(thumbnailPath);
 const thumbnailUrl = resolveAssetUrl(thumbnailPath);
 const isVideo = Boolean(projectPath?.includes("youtube.com") || projectPath?.includes("youtu.be"));
+const isTool = category === "tool" || tags.includes("ツール") || tags.includes("エディタ拡張");
+const placeholderIcon = isTool ? "🔧" : "🎮";
 ---
 
 <article class="project-card" data-tags={tags.join(",")}>
@@ -45,12 +49,12 @@ const isVideo = Boolean(projectPath?.includes("youtube.com") || projectPath?.inc
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
         />
         <div class="thumb-placeholder" style="display: none;">
-          <span class="placeholder-icon">🎮</span>
+          <span class="placeholder-icon">{placeholderIcon}</span>
           <span class="placeholder-title">{title}</span>
         </div>
       ) : (
         <div class="thumb-placeholder">
-          <span class="placeholder-icon">🎮</span>
+          <span class="placeholder-icon">{placeholderIcon}</span>
           <span class="placeholder-title">{title}</span>
         </div>
       )

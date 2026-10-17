@@ -38,7 +38,9 @@ const baseUrl = getBaseUrl();
                   />
                 ) : (
                   <div class="thumb-placeholder">
-                    <span class="placeholder-icon">🎮</span>
+                    <span class="placeholder-icon">
+                      {project.category === "tool" || project.tags?.includes("ツール") || project.tags?.includes("エディタ拡張") ? "🔧" : "🎮"}
+                    </span>
                     <span class="placeholder-title">{project.title}</span>
                   </div>
                 )}

@@ -14,6 +14,7 @@
     ],
     "futureGoals": "非同期処理（UniTask）の高度な活用や、メモリ最適化・GCアロケーション抑制の探求",
     "relatedProjectIds": [
+      "tool-rename-tool",
       "game-lilys-mystery-labyrinth",
       "game-catch-ball",
       "game-cloud-pinball",
@@ -34,12 +35,14 @@
     "capabilities": [
       "Rigidbody / Collider を用いた物理演算と当たり判定制御",
       "Rigidbodyを使わない自作物理挙動・等加速度移動処理の実装",
+      "EditorWindow / EditorGUILayout を用いた独自エディタ拡張ツールの自作",
       "uGUI によるレスポンシブなゲーム内UI・HUD構築",
       "Cinemachine を用いた動的カメラワークの演出",
       "WebGLプラットフォーム向けビルドおよびWeb展開"
     ],
     "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URPの高度なレンダリング調整",
     "relatedProjectIds": [
+      "tool-rename-tool",
       "game-lilys-mystery-labyrinth",
       "game-catch-ball",
       "game-cloud-pinball",
@@ -81,11 +84,13 @@
     "description": "安全なソースコード管理とWeb公開パイプラインを運用しています。",
     "capabilities": [
       "ブランチ運用（feature / main）と意味のあるコミット履歴の管理",
+      "GitHub Releasesとタグ付け（セマンティックバージョニング）によるパッケージ配信",
       "GitHub Pages を利用した WebGL ゲームおよびポートフォリオの自動デプロイ",
       "プルリクエストベースの開発フローと変更管理"
     ],
     "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）の導入",
     "relatedProjectIds": [
+      "tool-rename-tool",
       "game-cloud-pinball",
       "game-lilys-mystery-labyrinth",
       "game-catch-ball"

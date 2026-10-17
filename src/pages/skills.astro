@@ -141,7 +141,9 @@ const categories = [
                                   loading="lazy"
                                 />
                               ) : (
-                                <div class="related-thumb-placeholder">🎮</div>
+                                <div class="related-thumb-placeholder">
+                                  {proj.category === "tool" || proj.tags?.includes("ツール") || proj.tags?.includes("エディタ拡張") ? "🔧" : "🎮"}
+                                </div>
                               )}
                             </div>
                             <div class="related-info">
