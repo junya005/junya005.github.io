@@ -14,7 +14,7 @@
     "engine": "Unity (URP 2D) / C#",
     "thumbnailPath": "images/thumbnails/BatotteChannel_logo.png",
     "projectPath": "",
-    "githubUrl": "https://github.com/junya005/GameProject2025_BatotteChannel"
+    "githubUrl": ""
   },
   {
     "id": "game-toypair",
@@ -31,7 +31,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "images/thumbnails/ToyPair_Icon.png",
     "projectPath": "",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-stardrop",
@@ -48,7 +48,7 @@
     "engine": "Unity (URP 2D) / C#",
     "thumbnailPath": "images/thumbnails/StarDrop_Icon.gif",
     "projectPath": "https://unityroom.com/games/star_drop",
-    "githubUrl": "https://github.com/junya005/Unity_StarDrop"
+    "githubUrl": ""
   },
   {
     "id": "game-lilys-mystery-labyrinth",
@@ -65,7 +65,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/LilyAndMysteryLabyrinth/index.html",
-    "githubUrl": "https://github.com/junya005/Unity_LilysMysteryLabyrinth"
+    "githubUrl": ""
   },
   {
     "id": "game-parabolic-bomber",
@@ -82,7 +82,7 @@
     "engine": "C++ (C++23) / SDL2 (自作エンジン)",
     "thumbnailPath": "images/thumbnails/ParabolicBomber_bomb.png",
     "projectPath": "",
-    "githubUrl": "https://github.com/junya005/tech.c_gr.3_sat56_1st.sem_tobasu"
+    "githubUrl": ""
   },
   {
     "id": "game-builkour",
@@ -99,7 +99,7 @@
     "engine": "Vket Cloud SDK / HeliScript",
     "thumbnailPath": "",
     "projectPath": "",
-    "githubUrl": "https://github.com/junya005/builkour"
+    "githubUrl": ""
   },
   {
     "id": "game-justcoffee",
@@ -116,7 +116,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "images/thumbnails/JustCoffee_logo.png",
     "projectPath": "https://youtube.com/shorts/sb1fTAfvlss?feature=share",
-    "githubUrl": "https://github.com/junya005/JustCoffee"
+    "githubUrl": ""
   },
   {
     "id": "game-catch-ball",
@@ -133,7 +133,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/CatchBall/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-cloud-pinball",
@@ -150,7 +150,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "images/thumbnails/CloudPinBall_logo.png",
     "projectPath": "https://junya005.github.io/games/CloudPinBall/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-3d-shooting",
@@ -167,7 +167,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/SimpleShooter3D/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-rolling-ball-3d",
@@ -184,7 +184,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/RollingBall3D/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-ore-clicker",
@@ -201,7 +201,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/OreClicker/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-kami-sumo",
@@ -218,7 +218,7 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/KamiSumo/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   },
   {
     "id": "game-pinball",
@@ -235,6 +235,6 @@
     "engine": "Unity / C#",
     "thumbnailPath": "",
     "projectPath": "https://junya005.github.io/games/PinBall/index.html",
-    "githubUrl": "https://github.com/junya005"
+    "githubUrl": ""
   }
 ]

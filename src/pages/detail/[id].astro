@@ -1,10 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Breadcrumb from "../../components/ui/Breadcrumb.astro";
+import VideoEmbed from "../../components/ui/VideoEmbed.astro";
+import TableOfContents from "../../components/ui/TableOfContents.astro";
 import { getCollection, render } from "astro:content";
 import projects from "../../data/projects.json";
 import type { Project } from "../../types/project";
 import { getBaseUrl } from "../../utils/url";
+import { parseYouTubeVideo } from "../../utils/video";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -25,7 +28,7 @@ interface Props {
 }
 
 const { entry, projectMeta } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const baseUrl = getBaseUrl();
 
@@ -33,6 +36,9 @@ const pageTitle = projectMeta?.title || entry.data.title;
 const playUrl = projectMeta?.projectPath;
 const githubUrl = projectMeta?.githubUrl;
 const isVideo = Boolean(playUrl?.includes("youtube.com") || playUrl?.includes("youtu.be"));
+
+// 動画情報の抽出 (projectMeta.videoUrl または YouTube URL の playUrl)
+const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl : null));
 ---
 
 <Layout
@@ -137,6 +143,19 @@ const isVideo = Boolean(playUrl?.includes("youtube.com") || playUrl?.includes("y
       <!-- 2. 技術解説 & 制作ストーリー本文 (Markdown) -->
       <article class="content-card">
         <div class="content-badge">TECHNICAL NOTE & STORY</div>
+
+        <!-- 動画スペース (動画情報が存在する場合に最優先で表示) -->
+        {videoInfo && (
+          <VideoEmbed
+            embedUrl={videoInfo.embedUrl}
+            isShorts={videoInfo.isShorts}
+            title={`${pageTitle} トレイラー動画`}
+          />
+        )}
+
+        <!-- 目次スペース (Markdownの見出しから動的生成) -->
+        <TableOfContents headings={headings} />
+
         <div class="markdown-body">
           <Content />
         </div>

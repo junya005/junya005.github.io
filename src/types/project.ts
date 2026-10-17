@@ -30,6 +30,8 @@ export interface Project {
   thumbnailPath: string;
   /** WebGLゲーム実行URL */
   projectPath: string;
+  /** トレイラー動画等のURL (YouTube等) */
+  videoUrl?: string;
   /** ソースコード等のGitHub URL */
   githubUrl?: string;
 }

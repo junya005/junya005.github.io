@@ -1,0 +1,91 @@
+---
+interface Props {
+  embedUrl: string;
+  isShorts?: boolean;
+  title?: string;
+}
+
+const { embedUrl, isShorts = false, title = "作品トレイラー動画" } = Astro.props;
+---
+
+<section class="video-embed-section" aria-label="作品トレイラー動画">
+  <div class="video-section-header">
+    <div class="video-section-label">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="video-icon"
+      >
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      <span>TRAILER VIDEO</span>
+    </div>
+    {isShorts && (
+      <span class="video-badge-shorts">YouTube Shorts</span>
+    )}
+  </div>
+
+  <div class="video-player-box">
+    <div class={isShorts ? "video-container-shorts" : "video-container"}>
+      <iframe
+        src={embedUrl}
+        title={title}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-embed-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .video-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .video-section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.08em;
+  }
+
+  .video-icon {
+    color: var(--color-primary);
+  }
+
+  .video-badge-shorts {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #e05d84;
+    background-color: var(--color-accent-soft);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .video-player-box {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* global.css の .video-container と .video-container-shorts を活用しつつマージン調整 */
+  .video-player-box :global(.video-container),
+  .video-player-box :global(.video-container-shorts) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+</style>
