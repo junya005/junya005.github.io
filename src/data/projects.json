@@ -85,6 +85,23 @@
     "githubUrl": "https://github.com/junya005/com.junya005.rename-tool"
   },
   {
+    "id": "tool-sound-engine",
+    "category": "tool",
+    "title": "Sound Engine for Unity",
+    "description": "過去の複数ゲーム制作で共通して使用していた音声再生機能をUPM（Unity Package Manager）パッケージ化。ScriptableObjectによる音源管理、AudioSourceの動的オブジェクトプール、シーン配置不要の自動起動シングルトンにより、どのプロジェクトでも即座に導入できる再利用性を実現",
+    "period": "2026/7",
+    "duration": "約2週間",
+    "role": "企画 / アーキテクチャ設計 / パッケージ開発（個人開発）",
+    "tags": ["Unity", "ツール", "UPM", "ScriptableObject", "C#"],
+    "isFeatured": false,
+    "techHighlight": "ScriptableObjectデータドリブン設計、AudioSource動的オブジェクトプール、RuntimeInitialize自動起動シングルトン、UPM規格（Samples~）対応",
+    "platform": "Unity (2022.3 LTS 以降)",
+    "engine": "Unity / C# (UPM Package)",
+    "thumbnailPath": "",
+    "projectPath": "",
+    "githubUrl": ""
+  },
+  {
     "id": "game-parabolic-bomber",
     "category": "game",
     "title": "Parabolic Bomber",

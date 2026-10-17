@@ -14,6 +14,7 @@
     ],
     "futureGoals": "非同期処理（UniTask）の高度な活用や、メモリ最適化・GCアロケーション抑制の探求",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
       "game-lilys-mystery-labyrinth",
       "game-catch-ball",
@@ -35,6 +36,7 @@
     "capabilities": [
       "Rigidbody / Collider を用いた物理演算と当たり判定制御",
       "Rigidbodyを使わない自作物理挙動・等加速度移動処理の実装",
+      "ScriptableObjectを活用したデータドリブン設計とUPMパッケージ開発",
       "EditorWindow / EditorGUILayout を用いた独自エディタ拡張ツールの自作",
       "uGUI によるレスポンシブなゲーム内UI・HUD構築",
       "Cinemachine を用いた動的カメラワークの演出",
@@ -42,6 +44,7 @@
     ],
     "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URPの高度なレンダリング調整",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
       "game-lilys-mystery-labyrinth",
       "game-catch-ball",
@@ -90,6 +93,7 @@
     ],
     "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）の導入",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
       "game-cloud-pinball",
       "game-lilys-mystery-labyrinth",
