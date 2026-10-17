@@ -5,22 +5,12 @@ title: Just Coffee
 ## 1. 企画・開発背景
 株式会社FlyPenguinが提供するミニゲーム投稿プラットフォーム**「Minute Games」のβ版**に参加して制作した、**産学提携プロジェクトによる2Dカジュアルゲーム**です。
 作品のトレイラー動画を [YouTube Shorts（トレイラー動画）](https://youtube.com/shorts/sb1fTAfvlss?feature=share) にて公開しています。
-リポジトリは [GitHub（junya005/JustCoffee）](https://github.com/junya005/JustCoffee) にて公開しています。
 
 本作『Just Coffee』は、**「指定された目標ライン（ゴールライン）ぴったりにコーヒーを注ぐ」**という極めてシンプルながら奥深いワンアクションゲームです。
 画面上の注ぎボタンを長押ししている間だけポットからお湯が注がれ、カップ内のコーヒーの水位が上昇します。プレイヤーは目測でタイミングを測り、「ここだ！」という瞬間でボタンを離します。
 
 最大の面白さは、選んだコーヒー豆（難易度モード）によって、**誤差の判定単位が「cm」から「mm」、さらには極小の「μm（マイクロメートル）」までシビアになる点**です。
 短時間でルールを直感的に理解でき、1プレイ数十秒の中で「あと少しだった！」「ぴったり注げた！」という強いアハ体験とリプレイ性を生み出すゲームデザインを目指しました。
-
-<div class="video-container-shorts">
-  <iframe
-    src="https://www.youtube.com/embed/sb1fTAfvlss"
-    title="Just Coffee トレイラー動画"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-  ></iframe>
-</div>
 
 ---
 
