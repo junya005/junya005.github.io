@@ -68,6 +68,23 @@
     "githubUrl": ""
   },
   {
+    "id": "tool-rename-tool",
+    "category": "tool",
+    "title": "Rename Tool for Unity",
+    "description": "選択した複数オブジェクトの一括リネームを行うUnityエディタ拡張。接頭辞や連番付与、名前順ソート、完全なUndo対応、UPM（Unity Package Manager）パッケージ化とGitHub Releasesによる配布を見据えた研究・ツール開発プロジェクト",
+    "period": "2026/8",
+    "duration": "約1週間",
+    "role": "企画 / 設計 / スクリプト実装（個人研究）",
+    "tags": ["Unity", "エディタ拡張", "ツール", "UPM", "C#"],
+    "isFeatured": false,
+    "techHighlight": "EditorWindowによる直感的GUI、名前順ソート連番リネーム、Undo/SetDirtyによる非破壊・安全設計、UPMパッケージ規格準拠",
+    "platform": "Unity Editor (2022.3 LTS 以降)",
+    "engine": "Unity / C# (Editor Extension)",
+    "thumbnailPath": "",
+    "projectPath": "",
+    "githubUrl": "https://github.com/junya005/com.junya005.rename-tool"
+  },
+  {
     "id": "game-parabolic-bomber",
     "category": "game",
     "title": "Parabolic Bomber",
