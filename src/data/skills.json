@@ -5,17 +5,24 @@
     "category": "game",
     "categoryLabel": "ゲーム開発 & 言語",
     "tag": "メイン言語",
-    "description": "ゲームロジックおよびアルゴリズム実装の中心言語です。",
+    "description": "ゲームロジック、非同期処理、アーキテクチャ設計およびエディタ拡張の中心言語です。",
     "capabilities": [
-      "オブジェクト指向プログラミング（カプセル化・継承・ポリモーフィズム）の活用",
-      "ステートマシンパターンを用いた状態遷移・ゲームループ管理",
-      "イベント駆動アーキテクチャ（C# Action / UnityEvent）による疎結合設計",
-      "物理・数学演算（放物線軌道予測、乱数制御、二分木アルゴリズム）の実装"
+      "オブジェクト指向プログラミング（カプセル化・継承・ポリモーフィズム）とSOLID原則に基づく疎結合設計",
+      "UniTaskを用いた非同期処理・演出シーケンス・チュートリアル進行制御（バトってチャンネル！！）",
+      "VContainer（DIコンテナ）およびMVPアーキテクチャによる保守性の高いゲーム設計（怪盗リリィ）",
+      "ステートマシンパターンを用いた状態遷移・ゲームループ管理（Star Drop）",
+      "イベント駆動アーキテクチャ（C# Action / UnityEvent）によるモジュール間の疎結合化",
+      "ScriptableObjectやエディタAPI（Undo / SetDirty）を活用した拡張機能・ミドルウェア実装（Sound Engine / Rename Tool）"
     ],
-    "futureGoals": "非同期処理（UniTask）の高度な活用や、メモリ最適化・GCアロケーション抑制の探求",
+    "futureGoals": "メモリプロファイリングを通じたゼロアロケーション（GCレス）コーディングの徹底とC#最新言語機能の習得",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
+      "game-batotte-channel",
+      "game-toypair",
+      "game-stardrop",
       "game-lilys-mystery-labyrinth",
+      "game-justcoffee",
       "game-catch-ball",
       "game-cloud-pinball",
       "game-3d-shooting",
@@ -31,19 +38,25 @@
     "category": "game",
     "categoryLabel": "ゲーム開発 & 言語",
     "tag": "エンジン",
-    "description": "2D・3Dゲームの総合制作環境として日常的に使用しています。",
+    "description": "2D・3Dゲーム制作からエディタ拡張、UPMパッケージ化まで総合的に活用しています。",
     "capabilities": [
-      "Rigidbody / Collider を用いた物理演算と当たり判定制御",
-      "Rigidbodyを使わない自作物理挙動・等加速度移動処理の実装",
-      "EditorWindow / EditorGUILayout を用いた独自エディタ拡張ツールの自作",
-      "uGUI によるレスポンシブなゲーム内UI・HUD構築",
-      "Cinemachine を用いた動的カメラワークの演出",
-      "WebGLプラットフォーム向けビルドおよびWeb展開"
+      "2D / 3Dゲームの総合制作（物理演算、アニメーション、uGUI、Cinemachine、パーティクル演出）",
+      "Nintendo Switch実機開発におけるジャイロ体感操作とUnity Splineコース制御（ToyPair）",
+      "時間・BPM同期ノーツ判定エンジンと展示会環境（アスペクト比固定・2人対戦）への適応（バトってチャンネル！！）",
+      "Rigidbodyを使わない自作物理挙動・等加速度移動・放物線軌道予測の実装（キャッチボール）",
+      "プラットフォーム制約への適応（Minute Gamesのμm極小スケール制御、unityroom公開、WebGL最適化）",
+      "UPMパッケージ規格（package.json / Samples~）に準拠した再利用可能ミドルウェア開発",
+      "EditorWindowを用いた独自エディタ拡張ツールの自作（Rename Tool）"
     ],
-    "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URPの高度なレンダリング調整",
+    "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URP/HDRPの高度なレンダリングパイプライン制御",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
+      "game-batotte-channel",
+      "game-toypair",
+      "game-stardrop",
       "game-lilys-mystery-labyrinth",
+      "game-justcoffee",
       "game-catch-ball",
       "game-cloud-pinball",
       "game-3d-shooting",
@@ -54,6 +67,42 @@
     ]
   },
   {
+    "id": "cpp",
+    "name": "C++ / SDL2",
+    "category": "game",
+    "categoryLabel": "ゲーム開発 & 言語",
+    "tag": "低レイヤー / 言語",
+    "description": "商用エンジンに頼らないゲームループ設計や低レイヤー物理演算の理解を深めています。",
+    "capabilities": [
+      "SDL2を用いたゼロからのゲームループ（イベント処理・Update・Render）のスクラッチ実装",
+      "Window、Renderer、Input、Texture管理を抽象化・共通化した自作ミニエンジンの設計",
+      "AABB矩形当たり判定と反発・ノックバック物理演算・放物線投擲ロジックの実装",
+      "CMake と Visual Studio 付属コンパイラ（MSVC）を連携させたビルド構成管理と vcpkg による依存解決"
+    ],
+    "futureGoals": "DirectX / OpenGLを用いた独自グラフィックスパイプラインの実装や、自作ECSアーキテクチャの研究",
+    "relatedProjectIds": [
+      "game-parabolic-bomber"
+    ]
+  },
+  {
+    "id": "heliscript",
+    "name": "HeliScript / Vket Cloud SDK",
+    "category": "game",
+    "categoryLabel": "ゲーム開発 & 言語",
+    "tag": "メタバース / 独自言語",
+    "description": "メタバース空間におけるインタラクティブなギミック制作と公式SDK仕様の読解・実装を行いました。",
+    "capabilities": [
+      "独自スクリプト言語HeliScriptによるHEOノード制御とワールド内動的オブジェクト生成",
+      "プレイヤー自身が足場を生成してルートを組み立てる動的足場生成ギミックの企画・スクリプト実装",
+      "Vket Cloud公式仕様書・APIリファレンスを能動的に読み解き、短期間で新環境へ適応する実装力",
+      "Webブラウザで軽快に動作するメタバース向けワールドの要件理解と産学提携プロジェクトへの参加"
+    ],
+    "futureGoals": "Web3D / WebGL技術との連携や、リアルタイムマルチプレイ空間におけるギミック同期の探求",
+    "relatedProjectIds": [
+      "game-builkour"
+    ]
+  },
+  {
     "id": "algorithms",
     "name": "物理演算・アルゴリズム",
     "category": "game",
@@ -61,18 +110,43 @@
     "tag": "強み",
     "description": "「手触りの良さ」と「仕組みの面白さ」を数学的ロジックから追求しています。",
     "capabilities": [
-      "等加速度運動・放物線のリアルタイム軌道予測線の数式実装",
-      "穴掘り法（迷路自動生成）によるプロシージャルダンジョン構築",
-      "重み付け確率抽選アルゴリズムによるガチャシステム設計",
-      "クォータニオンを用いた3D回転・物理剛体シミュレーション制御"
+      "音楽ゲームにおけるミリ秒精度のノーツ時間判定・BPM同期タイミング計算（バトってチャンネル！！）",
+      "等加速度運動・放物線のリアルタイム軌道予測線の数式実装（キャッチボール）",
+      "穴掘り法（迷路自動生成）によるプロシージャルダンジョン構築（怪盗リリィ）",
+      "AABB矩形当たり判定と反発・ノックバック物理演算のスクラッチ実装（Parabolic Bomber）",
+      "重み付け確率抽選アルゴリズムによるガチャシステム設計（Ore Clicker）",
+      "Unity Splineを用いた曲線パス進行度計算とクォータニオンによる3D回転制御（ToyPair / 玉転がし3D）"
     ],
     "futureGoals": "A*アルゴリズム等の経路探索、群衆シミュレーション、ネット対戦における同期予測",
     "relatedProjectIds": [
-      "game-catch-ball",
+      "game-batotte-channel",
+      "game-toypair",
       "game-lilys-mystery-labyrinth",
+      "game-parabolic-bomber",
+      "game-catch-ball",
       "game-cloud-pinball",
       "game-ore-clicker",
       "game-rolling-ball-3d"
+    ]
+  },
+  {
+    "id": "upm-tools",
+    "name": "エディタ拡張 & UPMパッケージ開発",
+    "category": "tool",
+    "categoryLabel": "開発環境 & ツール",
+    "tag": "ツール開発 / 設計",
+    "description": "開発効率化ツールや再利用可能なモジュールをUPM規格に準拠して自作・公開しています。",
+    "capabilities": [
+      "EditorWindow / EditorGUILayout を用いた直感的なGUIツールの自作（Rename Tool）",
+      "Undo.RecordObjects / EditorUtility.SetDirty を用いた非破壊で安全なエディタ操作設計",
+      "ScriptableObjectを活用したデータドリブン設計とAudioSource動的オブジェクトプール（Sound Engine）",
+      "[RuntimeInitializeOnLoadMethod] を用いたシーン配置不要の自動起動シングルトン構築",
+      "UPM規格（package.json / Samples~ ディレクトリ）に準拠したGit URL配布パッケージの設計・運用"
+    ],
+    "futureGoals": "UI Toolkitを用いたモダンなエディタUI構築や、PropertyDrawerを活用したInspector拡張",
+    "relatedProjectIds": [
+      "tool-rename-tool",
+      "tool-sound-engine"
     ]
   },
   {
@@ -81,19 +155,23 @@
     "category": "tool",
     "categoryLabel": "開発環境 & ツール",
     "tag": "バージョン管理",
-    "description": "安全なソースコード管理とWeb公開パイプラインを運用しています。",
+    "description": "チーム開発での安全な変更管理、パッケージ配信、Web公開パイプラインを運用しています。",
     "capabilities": [
-      "ブランチ運用（feature / main）と意味のあるコミット履歴の管理",
-      "GitHub Releasesとタグ付け（セマンティックバージョニング）によるパッケージ配信",
+      "ブランチ運用（feature / main）とプルリクエストベースの開発フロー・変更管理",
+      "GitHub Releasesとタグ付け（セマンティックバージョニング）によるUPMパッケージ配信",
       "GitHub Pages を利用した WebGL ゲームおよびポートフォリオの自動デプロイ",
-      "プルリクエストベースの開発フローと変更管理"
+      "チーム開発（TGS出展作等）におけるコンフリクト回避とバージョン管理の徹底"
     ],
-    "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）の導入",
+    "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）と自動テストパイプラインの導入",
     "relatedProjectIds": [
+      "tool-sound-engine",
       "tool-rename-tool",
-      "game-cloud-pinball",
+      "game-batotte-channel",
+      "game-toypair",
+      "game-stardrop",
       "game-lilys-mystery-labyrinth",
-      "game-catch-ball"
+      "game-catch-ball",
+      "game-cloud-pinball"
     ]
   },
   {
@@ -116,19 +194,39 @@
     ]
   },
   {
+    "id": "visual-studio",
+    "name": "Visual Studio",
+    "category": "tool",
+    "categoryLabel": "開発環境 & ツール",
+    "tag": "統合開発環境 (IDE)",
+    "description": "C++開発におけるプロジェクト構成、CMakeビルド、MSVCコンパイラ連携および高度なデバッグを活用しています。",
+    "capabilities": [
+      "CMake と Visual Studio 付属コンパイラ（MSVC）を連携させたC++プロジェクトのビルドパイプライン構築",
+      "ブレークポイント、メモリダンプ、ウォッチ式を用いたネイティブコードの実行時デバッグ",
+      "vcpkgマニフェストモード（vcpkg.json）と連携した外部ライブラリ依存解決の自動化"
+    ],
+    "futureGoals": "パフォーマンスプロファイラ（CPU/メモリ診断ツール）を活用したボトルネック特定と最適化",
+    "relatedProjectIds": [
+      "game-parabolic-bomber"
+    ]
+  },
+  {
     "id": "vscode",
     "name": "VS Code",
     "category": "tool",
     "categoryLabel": "開発環境 & ツール",
     "tag": "エディタ",
-    "description": "快適でミスの少ないコーディング環境を整えています。",
+    "description": "Unity/C#開発やツール開発、Web制作を快適かつ迅速に行えるコーディング環境を整えています。",
     "capabilities": [
       "C# Dev Kit 等の拡張機能導入と Unity エディタデバッグ連携",
       "フォーマッタ・リンター設定によるコード品質保持",
       "ショートカットやスニペットによる高速コーディング"
     ],
     "futureGoals": "カスタムスニペットの拡充や開発用タスク自動化",
-    "relatedProjectIds": []
+    "relatedProjectIds": [
+      "tool-rename-tool",
+      "tool-sound-engine"
+    ]
   },
   {
     "id": "antigravity",
@@ -139,12 +237,14 @@
     "description": "Google製自律型コーディング環境を開発パートナーとして活用しています。",
     "capabilities": [
       "エージェントとのペアプログラミングによる実装速度の大幅な向上",
-      "大規模コードベースのリファクタリング（3層アーキテクチャ再編等）の迅速な実行",
-      "アーキテクチャ設計やエラー原因調査の多角的壁打ち"
+      "大規模コードベースのリファクタリング（VContainer/MVPへの再編等）の迅速な実行",
+      "アーキテクチャ設計やエラー原因調査、UPMパッケージ構造設計の多角的壁打ち"
     ],
     "futureGoals": "自作カスタムスキル（Skills）の定義によるプロジェクト固有ワークフローの完全自動化",
     "relatedProjectIds": [
       "game-lilys-mystery-labyrinth",
+      "tool-sound-engine",
+      "tool-rename-tool",
       "game-catch-ball",
       "game-cloud-pinball"
     ]
@@ -164,6 +264,8 @@
     "futureGoals": "自作MCPサーバーの実装による独自開発ツールのエージェント連携",
     "relatedProjectIds": [
       "game-lilys-mystery-labyrinth",
+      "tool-sound-engine",
+      "tool-rename-tool",
       "game-catch-ball"
     ]
   },
@@ -177,12 +279,13 @@
     "capabilities": [
       "ピンボール筐体の実寸法やゲーム仕様の迅速なリサーチと検証",
       "数式・物理アルゴリズムの先行実装例やドキュメントの比較調査",
-      "最新技術動向の素早いキャッチアップと制作への導入判断"
+      "最新技術動向・UPMパッケージ配布規格の素早いキャッチアップと導入判断"
     ],
     "futureGoals": "技術調査結果の社内・チーム向けナレッジドキュメント化の習慣づけ",
     "relatedProjectIds": [
       "game-cloud-pinball",
-      "game-catch-ball"
+      "game-catch-ball",
+      "tool-sound-engine"
     ]
   }
 ]
