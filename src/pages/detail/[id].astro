@@ -34,11 +34,11 @@ const baseUrl = getBaseUrl();
 
 const pageTitle = projectMeta?.title || entry.data.title;
 const playUrl = projectMeta?.projectPath;
+const videoUrl = projectMeta?.videoPath || projectMeta?.videoUrl;
 const githubUrl = projectMeta?.githubUrl;
-const isVideo = Boolean(playUrl?.includes("youtube.com") || playUrl?.includes("youtu.be"));
 
-// 動画情報の抽出 (projectMeta.videoUrl または YouTube URL の playUrl)
-const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl : null));
+// 動画情報の抽出 (videoPath または videoUrl)
+const videoInfo = parseYouTubeVideo(videoUrl);
 ---
 
 <Layout
@@ -107,6 +107,15 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
           </div>
         )}
 
+        <!-- トレイラー動画 (アクションボタン直前に埋め込み) -->
+        {videoInfo && (
+          <VideoEmbed
+            embedUrl={videoInfo.embedUrl}
+            isShorts={videoInfo.isShorts}
+            title={`${pageTitle} トレイラー動画`}
+          />
+        )}
+
         <!-- アクションボタン -->
         <div class="meta-actions">
           {playUrl ? (
@@ -119,7 +128,7 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z" />
               </svg>
-              <span>{isVideo ? "トレイラー動画を見る (YouTube)" : "ブラウザで今すぐプレイ (WebGL)"}</span>
+              <span>ブラウザで今すぐプレイ (WebGL)</span>
             </a>
           ) : (
             <div class="non-webgl-notice">
@@ -151,15 +160,6 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
       <!-- 2. 技術解説 & 制作ストーリー本文 (Markdown) -->
       <article class="content-card">
         <div class="content-badge">TECHNICAL NOTE & STORY</div>
-
-        <!-- 動画スペース (動画情報が存在する場合に最優先で表示) -->
-        {videoInfo && (
-          <VideoEmbed
-            embedUrl={videoInfo.embedUrl}
-            isShorts={videoInfo.isShorts}
-            title={`${pageTitle} トレイラー動画`}
-          />
-        )}
 
         <!-- 目次スペース (Markdownの見出しから動的生成) -->
         <TableOfContents headings={headings} />
@@ -372,6 +372,14 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
     color: var(--color-text-main);
     margin: 0;
     font-weight: 500;
+  }
+
+  /* メタヘッダーカード内のトレイラー動画セクション */
+  .meta-header-card :global(.video-embed-section) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--color-border-light);
   }
 
   .meta-actions {

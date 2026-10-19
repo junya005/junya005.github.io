@@ -21,7 +21,8 @@
         "platform": "PC (Windows / 展示環境)",
         "engine": "Unity (URP 2D) / C#",
         "thumbnailPath": "images/thumbnails/BatotteChannel_logo.png",
-        "projectPath": "https://youtu.be/fmoTXSR_9qM",
+        "projectPath": "",
+        "videoPath": "https://youtu.be/fmoTXSR_9qM",
         "githubUrl": ""
     },
     {
@@ -46,6 +47,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "images/thumbnails/ToyPair_Icon.png",
         "projectPath": "",
+        "videoPath": "https://youtu.be/e0vgPWYRPss",
         "githubUrl": ""
     },
     {
@@ -71,6 +73,7 @@
         "engine": "Unity (URP 2D) / C#",
         "thumbnailPath": "images/thumbnails/StarDrop_Icon.gif",
         "projectPath": "https://unityroom.com/games/star_drop",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -96,6 +99,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/LilyAndMysteryLabyrinth/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -121,6 +125,7 @@
         "engine": "Unity / C# (Editor Extension)",
         "thumbnailPath": "",
         "projectPath": "",
+        "videoPath": "",
         "githubUrl": "https://github.com/junya005/com.junya005.rename-tool"
     },
     {
@@ -146,6 +151,7 @@
         "engine": "Unity / C# (UPM Package)",
         "thumbnailPath": "",
         "projectPath": "",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -172,6 +178,7 @@
         "engine": "C++ (C++23) / SDL2 / Visual Studio (MSVC)",
         "thumbnailPath": "images/thumbnails/ParabolicBomber_bomb.png",
         "projectPath": "",
+        "videoPath": "https://youtu.be/U_eTDAExFFQ",
         "githubUrl": ""
     },
     {
@@ -197,6 +204,7 @@
         "engine": "Vket Cloud SDK / HeliScript",
         "thumbnailPath": "images/thumbnails/builkour_thumbnail.jpg",
         "projectPath": "https://junya005.cloud.vket.com/worlds/XwlzNAIF/main.html?worldid=XwlzNAIF&roomid=default__XwlzNAIF__PJSuVTdy9I2RlpH043",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -221,7 +229,8 @@
         "platform": "Web (Minute Games β版 / WebGL)",
         "engine": "Unity / C#",
         "thumbnailPath": "images/thumbnails/JustCoffee_logo.png",
-        "projectPath": "https://youtube.com/shorts/sb1fTAfvlss?feature=share",
+        "projectPath": "https://junya005.github.io/games/JustCoffee/index.html",
+        "videoPath": "https://youtube.com/shorts/sb1fTAfvlss?feature=share",
         "githubUrl": ""
     },
     {
@@ -246,6 +255,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/CatchBall/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -270,6 +280,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "images/thumbnails/CloudPinBall_logo.png",
         "projectPath": "https://junya005.github.io/games/CloudPinBall/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -293,6 +304,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/SimpleShooter3D/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -317,6 +329,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/RollingBall3D/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -340,6 +353,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/OreClicker/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -364,6 +378,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/KamiSumo/index.html",
+        "videoPath": "",
         "githubUrl": ""
     },
     {
@@ -388,6 +403,7 @@
         "engine": "Unity / C#",
         "thumbnailPath": "",
         "projectPath": "https://junya005.github.io/games/PinBall/index.html",
+        "videoPath": "",
         "githubUrl": ""
     }
 ]

@@ -35,6 +35,8 @@ export interface Project {
   /** WebGLゲーム実行URL */
   projectPath: string;
   /** トレイラー動画等のURL (YouTube等) */
+  videoPath?: string;
+  /** トレイラー動画等のURL (互換性用エイリアス) */
   videoUrl?: string;
   /** ソースコード等のGitHub URL */
   githubUrl?: string;

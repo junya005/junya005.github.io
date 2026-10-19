@@ -11,6 +11,7 @@ interface Props extends Partial<Project> {
   description: string;
   period: string;
   projectPath: string;
+  videoPath?: string;
   thumbnailPath: string;
 }
 
@@ -26,6 +27,7 @@ const {
   role,
   tags = [],
   projectPath,
+  videoPath,
   thumbnailPath,
   techHighlight,
   isFeatured = false,
@@ -34,7 +36,6 @@ const {
 const detailUrl = getDetailUrl(id);
 const hasThumbnail = Boolean(thumbnailPath);
 const thumbnailUrl = resolveAssetUrl(thumbnailPath);
-const isVideo = Boolean(projectPath?.includes("youtube.com") || projectPath?.includes("youtu.be"));
 const isTool = category === "tool" || tags.includes("ツール") || tags.includes("エディタ拡張");
 const placeholderIcon = isTool ? "🔧" : "🎮";
 ---
@@ -108,7 +109,7 @@ const placeholderIcon = isTool ? "🔧" : "🎮";
           rel="noopener noreferrer"
           class="btn btn-primary btn-card"
         >
-          <span>{isVideo ? "▶ トレイラー" : "▶ プレイ"}</span>
+          <span>▶ プレイ</span>
         </a>
       )}
       <a href={detailUrl} class="btn btn-outline btn-card">
