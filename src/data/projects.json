@@ -2,6 +2,8 @@
   {
     "id": "game-batotte-channel",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / TGS出展",
     "title": "バトってチャンネル！！",
     "description": "テレビのリモコンを巡るチャンネル争いをテーマにした2人対戦型リズムアクション。進級制作展およびTGS出展作品",
     "period": "2025/4 - 2025/9",
@@ -19,6 +21,8 @@
   {
     "id": "game-toypair",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / Switch・TGS出展",
     "title": "ToyPair",
     "description": "学校のチーム制作プロジェクトで制作した、ジャイロ操作が特徴のSwitch向け3D協力型体感アクションゲーム",
     "period": "2026/4 - 2026/9",
@@ -36,6 +40,8 @@
   {
     "id": "game-stardrop",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / 公開中",
     "title": "Star Drop",
     "description": "星を集めながら飛来するUFOをヒップドロップで撃退する2Dカジュアルアクション。素材（ドット絵・SE）も全て自作しunityroomに公開",
     "period": "2025",
@@ -53,6 +59,8 @@
   {
     "id": "game-lilys-mystery-labyrinth",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / 公開中",
     "title": "怪盗リリィと不思議の迷宮",
     "description": "学校課題で1週間の短期制作後、2週間でブラッシュアップしたローグライク。AIエージェントによる開発効率化、穴掘り法迷宮自動生成、怪盗フックスキルを実装",
     "period": "2026/5/30 - 2026/6/20",
@@ -70,6 +78,8 @@
   {
     "id": "tool-rename-tool",
     "category": "tool",
+    "projectType": "tool",
+    "projectTypeLabel": "ツール / UPMパッケージ",
     "title": "Rename Tool for Unity",
     "description": "選択した複数オブジェクトの一括リネームを行うUnityエディタ拡張。接頭辞や連番付与、名前順ソート、完全なUndo対応、UPM（Unity Package Manager）パッケージ化とGitHub Releasesによる配布を見据えた研究・ツール開発プロジェクト",
     "period": "2026/8",
@@ -87,6 +97,8 @@
   {
     "id": "tool-sound-engine",
     "category": "tool",
+    "projectType": "tool",
+    "projectTypeLabel": "ツール / UPMパッケージ",
     "title": "Sound Engine for Unity",
     "description": "過去の複数ゲーム制作で共通して使用していた音声再生機能をUPM（Unity Package Manager）パッケージ化。ScriptableObjectによる音源管理、AudioSourceの動的オブジェクトプール、シーン配置不要の自動起動シングルトンにより、どのプロジェクトでも即座に導入できる再利用性を実現",
     "period": "2026/7",
@@ -104,6 +116,8 @@
   {
     "id": "game-parabolic-bomber",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 自作エンジン",
     "title": "Parabolic Bomber",
     "description": "学校の企画選択授業で制作した、C++とSDL2による2人対戦型アクションゲーム。爆弾を投げ合い相手を画面外へ吹き飛ばす対戦ロジックと自作ミニエンジンを実装",
     "period": "2026/7/4 - 2026/7/24",
@@ -121,6 +135,8 @@
   {
     "id": "game-builkour",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / 産学提携",
     "title": "Builkour",
     "description": "産学提携プロジェクトで制作したVket Cloudワールド。プレイヤー自身が操作盤から空間に足場を出現・配置させ、進むべきルートを組み立てながら跳破するパルクールを企画・実装",
     "period": "2024/6/13 - 2024/7/4",
@@ -138,6 +154,8 @@
   {
     "id": "game-justcoffee",
     "category": "game",
+    "projectType": "product",
+    "projectTypeLabel": "完成作品 / 産学提携",
     "title": "Just Coffee",
     "description": "株式会社FlyPenguinのミニゲーム投稿プラットフォーム「Minute Games」β版向けに制作した産学提携作品。目標ラインぴったりにコーヒーを注ぐシンプルかつ奥深いカジュアルゲーム",
     "period": "2024/11 - 2025/2",
@@ -155,6 +173,8 @@
   {
     "id": "game-catch-ball",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 物理アルゴリズム",
     "title": "キャッチボール",
     "description": "Rigidbodyを使わず物理挙動を独自数式で実装。リアルタイム軌道予測とCinemachine動的カメラを組み込んだゲーム",
     "period": "2026/6/13 - 2026/6/20",
@@ -172,6 +192,8 @@
   {
     "id": "game-cloud-pinball",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 筐体物理挙動",
     "title": "Cloud PinBall",
     "description": "雲をテーマにしたピンボールゲーム。実機筐体の寸法比率再現と、遊びやすさを追求した多段階物理ブースト射出制御を実装",
     "period": "2026/4/25 - 2026/5/9",
@@ -189,6 +211,8 @@
   {
     "id": "game-3d-shooting",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / レイキャスト判定",
     "title": "シンプルFPS",
     "description": "レイキャストによる高精度ヒット判定と制限時間ターゲット破壊を取り入れた3Dシューティング",
     "period": "2026/7/18 - 2026/8/22",
@@ -206,6 +230,8 @@
   {
     "id": "game-rolling-ball-3d",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 慣性・回転シミュレーション",
     "title": "玉転がし3D",
     "description": "ステージ傾斜操作と剛体物理シミュレーションを組み合わせた3Dバランスアクション",
     "period": "2026/7/18 - 2026/8/22",
@@ -223,6 +249,8 @@
   {
     "id": "game-ore-clicker",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / ガチャ抽選ロジック",
     "title": "Ore Clicker",
     "description": "重み付け確率抽選のガチャシステムとリソース永続化を組み込んだインクリメンタルゲーム",
     "period": "2026/5/23 - 2026/5/30",
@@ -240,6 +268,8 @@
   {
     "id": "game-kami-sumo",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 振動物理挙動",
     "title": "Kami Sumo",
     "description": "土俵タップの振動波及と物理演算による紙相撲対戦シミュレーション",
     "period": "2026/5/9 - 2026/5/16",
@@ -257,14 +287,16 @@
   {
     "id": "game-pinball",
     "category": "game",
+    "projectType": "prototype",
+    "projectTypeLabel": "技術検証 / 3D物理基礎",
     "title": "PinBall",
-    "description": "ゲーム制作の基礎を学ぶために制作したシンプルな2Dピンボールゲーム",
+    "description": "ゲーム制作の基礎を学ぶために制作したシンプルな3Dピンボールゲーム",
     "period": "2025/9",
     "duration": "約2週間",
     "role": "プログラミング（個人開発）",
-    "tags": ["Unity", "2D", "物理演算", "C#"],
+    "tags": ["Unity", "3D", "物理演算", "C#"],
     "isFeatured": false,
-    "techHighlight": "Unityの2D物理エンジン（Rigidbody2D, Collider2D）を活用した基礎制作",
+    "techHighlight": "Unityの物理エンジン（Rigidbody, Collider）を活用した3Dピンボールの基礎挙動とライティング演出",
     "platform": "PC WebGL (ブラウザ実行)",
     "engine": "Unity / C#",
     "thumbnailPath": "",

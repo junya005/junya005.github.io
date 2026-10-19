@@ -14,14 +14,16 @@ const allTags = Array.from(
   new Set(projects.flatMap((project) => project.tags || []))
 );
 
-// フィルタ用主要タグ
+// フィルタ用主要カテゴリ（作品タイプ ＋ 技術タグ）
 const filterCategories = [
   { id: "all", label: "すべて" },
+  { id: "product", label: "🌟 完成作品" },
+  { id: "prototype", label: "🔬 技術検証" },
+  { id: "tool", label: "🔧 開発ツール" },
   { id: "featured", label: "代表作 (Featured)" },
-  { id: "3D", label: "3D作品" },
-  { id: "2D", label: "2D作品" },
-  { id: "エディタ拡張", label: "エディタ拡張・ツール" },
-  { id: "C++", label: "C++作品" },
+  { id: "3D", label: "3D" },
+  { id: "2D", label: "2D" },
+  { id: "C++", label: "C++" },
   { id: "アルゴリズム", label: "アルゴリズム" },
   { id: "物理演算", label: "物理演算" },
 ];
@@ -43,13 +45,14 @@ const filterCategories = [
         <span class="section-sub">PORTFOLIO</span>
         <h1 class="page-title">制作実績・作品一覧</h1>
         <p class="page-lead">
-          Unity/C#、C++/SDL2（自作エンジン）、エディタ拡張ツール、Vket Cloud（HeliScript）等を用いて制作したゲーム・ツール・ワールド作品（全 {projects.length} 件）です。<br />
-          気になる技術や言語・ジャンルで絞り込んでご覧いただけます。
+          展示や外部公開までゲームとして仕上げた<strong>「完成作品」</strong>と、<br class="pc-only" />
+          特定の数式・自作エンジン・物理挙動を高速に実験した<strong>「プロトタイプ・技術検証」</strong>、および<strong>「開発ツール」</strong>（全 {projects.length} 件）を掲載しています。<br />
+          気になる区分や技術タグで絞り込んでご覧いただけます。
         </p>
 
         <!-- タグフィルター -->
         <div class="filter-container">
-          <span class="filter-label">タグで絞り込み:</span>
+          <span class="filter-label">区分・タグで絞り込み:</span>
           <div class="filter-buttons" role="tablist">
             {
               filterCategories.map((cat, index) => (
@@ -80,6 +83,7 @@ const filterCategories = [
             <div
               class="grid-item"
               data-tags={project.tags?.join(",") || ""}
+              data-type={project.projectType || "product"}
               data-featured={project.isFeatured ? "true" : "false"}
             >
               <ProjectCard {...project} />
@@ -113,6 +117,7 @@ const filterCategories = [
 
       gridItems.forEach((item) => {
         const itemTags = item.dataset.tags || "";
+        const itemType = item.dataset.type || "";
         const isFeatured = item.dataset.featured === "true";
 
         let matches = false;
@@ -121,6 +126,8 @@ const filterCategories = [
           matches = true;
         } else if (filterId === "featured") {
           matches = isFeatured;
+        } else if (filterId === "product" || filterId === "prototype" || filterId === "tool") {
+          matches = itemType === filterId;
         } else {
           matches = itemTags.split(",").includes(filterId);
         }
@@ -315,6 +322,10 @@ const filterCategories = [
 
     .project-grid {
       grid-template-columns: 1fr;
+    }
+
+    .pc-only {
+      display: none;
     }
   }
 </style>
