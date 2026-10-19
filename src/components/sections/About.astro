@@ -45,16 +45,39 @@ const baseUrl = getBaseUrl();
         </div>
 
         <div class="about-text">
-          <h4>ゲームづくりへの思いとこだわり</h4>
-          <p>
-            現在、専門学校でゲーム開発を学んでいます。単にアセットを配置するだけでなく、
-            <strong>「なぜその挙動になるのか」「どうすればプレイヤーが手触りの良さを感じられるか」</strong>
-            を数学や物理のロジックに基づいてコードに落とし込むことに面白さを感じています。
-          </p>
-          <p>
-            ピンボールゲームでのフリッパー角度と初速の微調整や、放物線計算によるキャッチボールの軌道予測、ダンジョンの自動生成など、
-            自らの手で仕組みを一から組み上げる開発を得意としています。
-          </p>
+          <h4 class="pr-main-title">自己PR：目指すエンジニア像と技術的強み</h4>
+
+          <div class="pr-block">
+            <h5 class="pr-heading">
+              <span class="pr-icon">🎯</span>
+              <span>目指すエンジニア像（やりたいこと）</span>
+            </h5>
+            <p>
+              プレイヤーが直感的に没頭できる<strong>「手触りの良いアクション体験」</strong>を作りたいと考えています。
+              ゲームプレイの面白さを現場で追求したのち、将来的には<strong>社内ツールやエンジン開発など、チーム全体の開発を裏側から支えるエンジニア</strong>を目指しています。
+            </p>
+          </div>
+
+          <div class="pr-block">
+            <h5 class="pr-heading">
+              <span class="pr-icon">⚡</span>
+              <span>技術的な強み</span>
+            </h5>
+            <div class="pr-points">
+              <div class="pr-point-item">
+                <h6 class="pr-point-title">操作感・手触りを追求する実装力</h6>
+                <p>
+                  数学・物理演算に基づく挙動制御をはじめ、Nintendo Switchのジャイロ操作、ヒットストップ、リズム同期など、「操作していて気持ちいい」と感じる体験をコードで具現化できます。
+                </p>
+              </div>
+              <div class="pr-point-item">
+                <h6 class="pr-point-title">新技術への適応力とAIを活用した高速開発</h6>
+                <p>
+                  独自言語（HeliScript）のような未知の仕様も公式ドキュメントから自力で素早く理解し実装できます。また、AIエージェントを開発に組み込み、短期間で高品質なプロトタイプを作り上げるスピード感を持っています。
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -189,21 +212,68 @@ const baseUrl = getBaseUrl();
     color: var(--color-text-main);
   }
 
-  .about-text h4 {
-    font-size: 1.15rem;
-    margin-bottom: 0.75rem;
+  .about-text .pr-main-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
     color: var(--color-primary);
   }
 
-  .about-text p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: var(--color-text-body);
-    margin-bottom: 1rem;
+  .pr-block {
+    margin-bottom: 1.5rem;
   }
 
-  .about-text p:last-child {
+  .pr-block:last-child {
     margin-bottom: 0;
+  }
+
+  .pr-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .pr-icon {
+    font-size: 1.05rem;
+  }
+
+  .pr-block p {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: var(--color-text-body);
+    margin: 0;
+  }
+
+  .pr-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.6rem;
+  }
+
+  .pr-point-item {
+    background: var(--color-surface-cloud);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.1rem;
+  }
+
+  .pr-point-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: 0.35rem;
+  }
+
+  .pr-point-item p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   @media (max-width: 960px) {

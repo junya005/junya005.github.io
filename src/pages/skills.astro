@@ -66,10 +66,11 @@ const categories = [
       <div class="skills-list" id="skills-list">
         {
           skills.map((skill) => {
-            // 関連作品データの取得
-            const relatedProjects = projects.filter((p) =>
-              skill.relatedProjectIds.includes(p.id)
-            );
+            // 作品側のタグに依存した関連作品の動的取得
+            const skillTags = skill.tags || [];
+            const relatedProjects = skillTags.length > 0
+              ? projects.filter((p) => p.tags?.some((t) => skillTags.includes(t)))
+              : [];
 
             return (
               <article
