@@ -15,21 +15,8 @@
       "ScriptableObjectやエディタAPI（Undo / SetDirty）を活用した拡張機能・ミドルウェア実装（Sound Engine / Rename Tool）"
     ],
     "futureGoals": "メモリプロファイリングを通じたゼロアロケーション（GCレス）コーディングの徹底とC#最新言語機能の習得",
-    "relatedProjectIds": [
-      "tool-sound-engine",
-      "tool-rename-tool",
-      "game-batotte-channel",
-      "game-toypair",
-      "game-stardrop",
-      "game-lilys-mystery-labyrinth",
-      "game-justcoffee",
-      "game-catch-ball",
-      "game-cloud-pinball",
-      "game-3d-shooting",
-      "game-rolling-ball-3d",
-      "game-ore-clicker",
-      "game-kami-sumo",
-      "game-pinball"
+    "tags": [
+      "C#"
     ]
   },
   {
@@ -49,21 +36,8 @@
       "EditorWindowを用いた独自エディタ拡張ツールの自作（Rename Tool）"
     ],
     "futureGoals": "Shader Graph / HLSLを用いたカスタムシェーダー制作、URP/HDRPの高度なレンダリングパイプライン制御",
-    "relatedProjectIds": [
-      "tool-sound-engine",
-      "tool-rename-tool",
-      "game-batotte-channel",
-      "game-toypair",
-      "game-stardrop",
-      "game-lilys-mystery-labyrinth",
-      "game-justcoffee",
-      "game-catch-ball",
-      "game-cloud-pinball",
-      "game-3d-shooting",
-      "game-rolling-ball-3d",
-      "game-ore-clicker",
-      "game-kami-sumo",
-      "game-pinball"
+    "tags": [
+      "Unity"
     ]
   },
   {
@@ -80,8 +54,9 @@
       "CMake と Visual Studio 付属コンパイラ（MSVC）を連携させたビルド構成管理と vcpkg による依存解決"
     ],
     "futureGoals": "DirectX / OpenGLを用いた独自グラフィックスパイプラインの実装や、自作ECSアーキテクチャの研究",
-    "relatedProjectIds": [
-      "game-parabolic-bomber"
+    "tags": [
+      "C++",
+      "SDL2"
     ]
   },
   {
@@ -98,8 +73,9 @@
       "Webブラウザで軽快に動作するメタバース向けワールドの要件理解と産学提携プロジェクトへの参加"
     ],
     "futureGoals": "Web3D / WebGL技術との連携や、リアルタイムマルチプレイ空間におけるギミック同期の探求",
-    "relatedProjectIds": [
-      "game-builkour"
+    "tags": [
+      "HeliScript",
+      "Vket Cloud"
     ]
   },
   {
@@ -110,23 +86,18 @@
     "tag": "強み",
     "description": "「手触りの良さ」と「仕組みの面白さ」を数学的ロジックから追求しています。",
     "capabilities": [
-      "音楽ゲームにおけるミリ秒精度のノーツ時間判定・BPM同期タイミング計算（バトってチャンネル！！）",
+      "音楽ゲームにおけるミリ秒精度のノーツ時間判定・BPM同期タイミング計算の実装",
       "等加速度運動・放物線のリアルタイム軌道予測線の数式実装（キャッチボール）",
       "穴掘り法（迷路自動生成）によるプロシージャルダンジョン構築（怪盗リリィ）",
-      "AABB矩形当たり判定と反発・ノックバック物理演算のスクラッチ実装（Parabolic Bomber）",
-      "重み付け確率抽選アルゴリズムによるガチャシステム設計（Ore Clicker）",
-      "Unity Splineを用いた曲線パス進行度計算とクォータニオンによる3D回転制御（ToyPair / 玉転がし3D）"
+      "AABB矩形当たり判定と反発・ノックバック物理演算のスクラッチ実装",
+      "重み付け確率抽選アルゴリズムによるガチャシステム設計",
+      "曲線パス進行度計算とクォータニオンによる3D回転制御（玉転がし3D）"
     ],
     "futureGoals": "A*アルゴリズム等の経路探索、群衆シミュレーション、ネット対戦における同期予測",
-    "relatedProjectIds": [
-      "game-batotte-channel",
-      "game-toypair",
-      "game-lilys-mystery-labyrinth",
-      "game-parabolic-bomber",
-      "game-catch-ball",
-      "game-cloud-pinball",
-      "game-ore-clicker",
-      "game-rolling-ball-3d"
+    "tags": [
+      "物理演算",
+      "物理・数学",
+      "アルゴリズム"
     ]
   },
   {
@@ -144,9 +115,9 @@
       "UPM規格（package.json / Samples~ ディレクトリ）に準拠したGit URL配布パッケージの設計・運用"
     ],
     "futureGoals": "UI Toolkitを用いたモダンなエディタUI構築や、PropertyDrawerを活用したInspector拡張",
-    "relatedProjectIds": [
-      "tool-rename-tool",
-      "tool-sound-engine"
+    "tags": [
+      "UPM",
+      "エディタ拡張"
     ]
   },
   {
@@ -163,16 +134,7 @@
       "チーム開発（TGS出展作等）におけるコンフリクト回避とバージョン管理の徹底"
     ],
     "futureGoals": "GitHub Actions を用いたUnity自動ビルド（CI/CD）と自動テストパイプラインの導入",
-    "relatedProjectIds": [
-      "tool-sound-engine",
-      "tool-rename-tool",
-      "game-batotte-channel",
-      "game-toypair",
-      "game-stardrop",
-      "game-lilys-mystery-labyrinth",
-      "game-catch-ball",
-      "game-cloud-pinball"
-    ]
+    "tags": []
   },
   {
     "id": "blender",
@@ -187,11 +149,7 @@
       "FBXエクスポートとUnityインポート・マテリアル連携"
     ],
     "futureGoals": "ボーンリギングと基本的なキャラクタアニメーション作成の習得",
-    "relatedProjectIds": [
-      "game-rolling-ball-3d",
-      "game-3d-shooting",
-      "game-kami-sumo"
-    ]
+    "tags": []
   },
   {
     "id": "visual-studio",
@@ -206,8 +164,8 @@
       "vcpkgマニフェストモード（vcpkg.json）と連携した外部ライブラリ依存解決の自動化"
     ],
     "futureGoals": "パフォーマンスプロファイラ（CPU/メモリ診断ツール）を活用したボトルネック特定と最適化",
-    "relatedProjectIds": [
-      "game-parabolic-bomber"
+    "tags": [
+      "Visual Studio"
     ]
   },
   {
@@ -223,10 +181,7 @@
       "ショートカットやスニペットによる高速コーディング"
     ],
     "futureGoals": "カスタムスニペットの拡充や開発用タスク自動化",
-    "relatedProjectIds": [
-      "tool-rename-tool",
-      "tool-sound-engine"
-    ]
+    "tags": []
   },
   {
     "id": "antigravity",
@@ -241,12 +196,8 @@
       "アーキテクチャ設計やエラー原因調査、UPMパッケージ構造設計の多角的壁打ち"
     ],
     "futureGoals": "自作カスタムスキル（Skills）の定義によるプロジェクト固有ワークフローの完全自動化",
-    "relatedProjectIds": [
-      "game-lilys-mystery-labyrinth",
-      "tool-sound-engine",
-      "tool-rename-tool",
-      "game-catch-ball",
-      "game-cloud-pinball"
+    "tags": [
+      "AI共創"
     ]
   },
   {
@@ -255,18 +206,15 @@
     "category": "ai",
     "categoryLabel": "AI活用 & ワークフロー",
     "tag": "ツール連携",
-    "description": "AIモデルと開発環境を直接繋ぐ最新プロトコルを実制作に組み込んでいます。",
+    "description": "AIモデルとUnityエディタ・ローカル開発環境を直接繋ぐプロトコル（MCP）を実制作に導入し、迅速なプロトタイピングと開発効率化を実現しています。",
     "capabilities": [
-      "Unity MCP サーバー経由でのエディタ操作・アセット情報取得の連携",
-      "定型作業やボイラープレートコード生成の自動化パイプライン構築",
-      "ファイルシステム操作や外部ツールのエージェント統合"
+      "Unity MCP サーバーやファイルシステム連携を通じたコード生成・エディタ操作の自動化（怪盗リリィ、シンプルFPS、玉転がし3D）",
+      "機能ごとの責務分離を指示に組み込み、AI生成コードでも可読性・保守性を損なわない開発ワークフローの実践",
+      "定型的なボイラープレートやデータ接続を自動化し、物理演算やアルゴリズム等のコアゲームロジック検証に集中する環境の構築"
     ],
-    "futureGoals": "自作MCPサーバーの実装による独自開発ツールのエージェント連携",
-    "relatedProjectIds": [
-      "game-lilys-mystery-labyrinth",
-      "tool-sound-engine",
-      "tool-rename-tool",
-      "game-catch-ball"
+    "futureGoals": "自作MCPサーバーの実装による独自開発ツールやワークフローのエージェント連携強化",
+    "tags": [
+      "MCP"
     ]
   },
   {
@@ -282,10 +230,6 @@
       "最新技術動向・UPMパッケージ配布規格の素早いキャッチアップと導入判断"
     ],
     "futureGoals": "技術調査結果の社内・チーム向けナレッジドキュメント化の習慣づけ",
-    "relatedProjectIds": [
-      "game-cloud-pinball",
-      "game-catch-ball",
-      "tool-sound-engine"
-    ]
+    "tags": []
   }
 ]

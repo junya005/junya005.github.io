@@ -18,6 +18,8 @@ export interface Skill {
   capabilities: string[];
   /** 今後の学習目標・挑戦したい技術（向上心・成長意欲） */
   futureGoals?: string;
-  /** この技術を使って制作した作品ID（projects.jsonのidに対応） */
-  relatedProjectIds: string[];
+  /** このスキルに関連する作品タグ一覧（projects.jsonのtagsと照合） */
+  tags?: string[];
+  /** (非推奨・タグ依存に移行) この技術を使って制作した作品ID */
+  relatedProjectIds?: string[];
 }

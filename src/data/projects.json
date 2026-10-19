@@ -91,6 +91,7 @@
             "2D",
             "アルゴリズム",
             "AI共創",
+            "MCP",
             "C#"
         ],
         "isFeatured": true,
@@ -296,7 +297,8 @@
         "tags": [
             "Unity",
             "3D",
-            "C#"
+            "C#",
+            "MCP"
         ],
         "isFeatured": false,
         "techHighlight": "レイキャストによる高精度射撃判定とFPS視点カメラ制御",
@@ -321,7 +323,8 @@
             "Unity",
             "3D",
             "物理演算",
-            "C#"
+            "C#",
+            "MCP"
         ],
         "isFeatured": false,
         "techHighlight": "クォータニオンを用いたステージ傾斜回転とリジッドボディの慣性挙動制御",
