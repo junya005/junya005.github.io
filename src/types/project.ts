@@ -18,6 +18,10 @@ export interface Project {
   role?: string;
   /** 技術・ジャンルタグ (例: ["Unity", "2D", "アルゴリズム", "C#"]) */
   tags: string[];
+  /** 作品タイプ ("product": 完成作品・プロダクト, "prototype": プロトタイプ・技術検証, "tool": ツール・ミドルウェア) */
+  projectType?: "product" | "prototype" | "tool";
+  /** 作品タイプリスト表示用ラベル (例: "完成作品", "技術検証", "ツール") */
+  projectTypeLabel?: string;
   /** 代表作フラグ */
   isFeatured?: boolean;
   /** 技術ハイライト・こだわり要約 */

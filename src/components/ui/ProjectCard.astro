@@ -5,6 +5,8 @@ import { getDetailUrl, resolveAssetUrl } from "../../utils/url";
 interface Props extends Partial<Project> {
   id: string;
   category?: string;
+  projectType?: "product" | "prototype" | "tool";
+  projectTypeLabel?: string;
   title: string;
   description: string;
   period: string;
@@ -15,6 +17,8 @@ interface Props extends Partial<Project> {
 const {
   id,
   category = "game",
+  projectType = "product",
+  projectTypeLabel,
   title,
   description,
   period,
@@ -35,8 +39,18 @@ const isTool = category === "tool" || tags.includes("ツール") || tags.include
 const placeholderIcon = isTool ? "🔧" : "🎮";
 ---
 
-<article class="project-card" data-tags={tags.join(",")}>
-  {isFeatured && <div class="featured-ribbon">Featured</div>}
+<article class="project-card" data-tags={tags.join(",")} data-type={projectType}>
+  <div class="card-badges">
+    {projectTypeLabel && (
+      <span class={`type-badge badge-type-${projectType}`}>
+        {projectType === "product" && "🌟 "}
+        {projectType === "prototype" && "🔬 "}
+        {projectType === "tool" && "🔧 "}
+        {projectTypeLabel}
+      </span>
+    )}
+    {isFeatured && <div class="featured-ribbon">Featured</div>}
+  </div>
 
   <a href={detailUrl} class="thumb-link" tabindex="-1" aria-hidden="true">
     {
@@ -127,11 +141,49 @@ const placeholderIcon = isTool ? "🔧" : "🎮";
     border-color: rgba(72, 184, 236, 0.4);
   }
 
-  .featured-ribbon {
+  .card-badges {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
     z-index: 2;
+    pointer-events: none;
+  }
+
+  .type-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
+  }
+
+  .badge-type-product {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--color-primary);
+    border: 1px solid rgba(72, 184, 236, 0.35);
+  }
+
+  .badge-type-prototype {
+    background: rgba(255, 255, 255, 0.95);
+    color: #4f46e5;
+    border: 1px solid rgba(79, 70, 229, 0.3);
+  }
+
+  .badge-type-tool {
+    background: rgba(255, 255, 255, 0.95);
+    color: #c026d3;
+    border: 1px solid rgba(192, 38, 211, 0.3);
+  }
+
+  .featured-ribbon {
+    margin-left: auto;
     background: var(--color-accent-soft);
     color: #e05d84;
     font-size: 0.72rem;
@@ -140,6 +192,7 @@ const placeholderIcon = isTool ? "🔧" : "🎮";
     border-radius: var(--radius-pill);
     border: 1px solid rgba(255, 153, 182, 0.4);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
   }
 
   .thumb-link {

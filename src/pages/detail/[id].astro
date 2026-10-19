@@ -60,12 +60,20 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
       <section class="meta-header-card">
         <div class="meta-top-row">
           <div class="meta-tags">
-            {projectMeta?.tags?.map((tag) => (
-              <span class="badge-tag">{tag}</span>
-            ))}
+            {projectMeta?.projectTypeLabel && (
+              <span class={`badge-tag badge-type badge-type-${projectMeta.projectType || "product"}`}>
+                {projectMeta.projectType === "product" && "🌟 "}
+                {projectMeta.projectType === "prototype" && "🔬 "}
+                {projectMeta.projectType === "tool" && "🔧 "}
+                {projectMeta.projectTypeLabel}
+              </span>
+            )}
             {projectMeta?.isFeatured && (
               <span class="badge-tag badge-accent">Featured 代表作</span>
             )}
+            {projectMeta?.tags?.map((tag) => (
+              <span class="badge-tag">{tag}</span>
+            ))}
           </div>
           <span class="meta-period">制作期間: {projectMeta?.duration || projectMeta?.period}</span>
         </div>
@@ -265,6 +273,28 @@ const videoInfo = parseYouTubeVideo(projectMeta?.videoUrl || (isVideo ? playUrl 
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
+  }
+
+  .badge-type {
+    font-weight: 700;
+  }
+
+  .badge-type-product {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border: 1px solid rgba(72, 184, 236, 0.4);
+  }
+
+  .badge-type-prototype {
+    background-color: #eef2ff;
+    color: #4f46e5;
+    border: 1px solid rgba(79, 70, 229, 0.35);
+  }
+
+  .badge-type-tool {
+    background-color: #fae8ff;
+    color: #c026d3;
+    border: 1px solid rgba(192, 38, 211, 0.35);
   }
 
   .meta-period {
