@@ -23,7 +23,7 @@
         "thumbnailPath": "images/thumbnails/BatotteChannel_logo.png",
         "projectPath": "",
         "videoPath": "https://youtu.be/fmoTXSR_9qM",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/junya005/unity-batotte-channel-portfolio"
     },
     {
         "id": "game-toypair",
@@ -48,7 +48,7 @@
         "thumbnailPath": "images/thumbnails/ToyPair_Icon.png",
         "projectPath": "",
         "videoPath": "https://youtu.be/e0vgPWYRPss",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/junya005/unity-toypair-portfolio/"
     },
     {
         "id": "game-stardrop",
@@ -71,16 +71,16 @@
         "techHighlight": "ヒップドロップの予備動作とヒットストップによる爽快感演出、SOLID原則に基づくインターフェース分離設計、unityroom公開",
         "platform": "PC WebGL (unityroom)",
         "engine": "Unity (URP 2D) / C#",
-        "thumbnailPath": "images/thumbnails/StarDrop_Icon.gif",
+        "thumbnailPath": "images/thumbnails/StarDrop_lcon.png",
         "projectPath": "https://unityroom.com/games/star_drop",
         "videoPath": "",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/junya005/unity-stardrop"
     },
     {
         "id": "game-lilys-mystery-labyrinth",
         "category": "game",
-        "projectType": "product",
-        "projectTypeLabel": "完成作品 / 公開中",
+        "projectType": "prototype",
+        "projectTypeLabel": "技術検証 / 迷宮自動生成・AI共創",
         "title": "怪盗リリィと不思議の迷宮",
         "description": "学校課題で1週間の短期制作後、2週間でブラッシュアップしたローグライク。AIエージェントによる開発効率化、穴掘り法迷宮自動生成、怪盗フックスキルを実装",
         "period": "2026/5/30 - 2026/6/20",
@@ -94,7 +94,7 @@
             "MCP",
             "C#"
         ],
-        "isFeatured": true,
+        "isFeatured": false,
         "techHighlight": "AIエージェント活用による超短期開発、穴掘り法アルゴリズム、VContainer+MVP設計、Stateパターン敵AI、怪盗フック移動",
         "platform": "PC WebGL (ブラウザ実行)",
         "engine": "Unity / C#",
@@ -102,6 +102,35 @@
         "projectPath": "https://junya005.github.io/games/LilyAndMysteryLabyrinth/index.html",
         "videoPath": "",
         "githubUrl": ""
+    },
+    {
+        "id": "tool-yamaneko-engine",
+        "category": "tool",
+        "projectType": "tool",
+        "projectTypeLabel": "自作エンジン / C++・OpenGL",
+        "title": "Yamaneko Engine",
+        "description": "SDL2とOpenGL 3.2 Coreを用いたC++製ゲーム開発テンプレート・軽量ゲームエンジン。Engine::Application基底によるゲームループのカプセル化、高精度DeltaTime計測、テクスチャキャッシュAssetManager、Dear ImGuiによるUI・デバッグ環境、安全な遅延シーン遷移機構を完備",
+        "period": "2025 - 現在",
+        "duration": "約1ヶ月 (基盤開発) + 継続拡張",
+        "role": "エンジンアーキテクチャ設計 / コア機能実装（個人開発）",
+        "tags": [
+            "C++",
+            "OpenGL",
+            "SDL2",
+            "自作エンジン",
+            "CMake",
+            "vcpkg",
+            "Dear ImGui",
+            "ツール"
+        ],
+        "isFeatured": true,
+        "techHighlight": "CMake/vcpkg環境構築、OpenGL 3.2 Core描画パイプライン、Applicationライフサイクル設計、遅延シーン遷移",
+        "platform": "Windows (C++ / x64)",
+        "engine": "C++ / OpenGL / SDL2",
+        "thumbnailPath": "",
+        "projectPath": "",
+        "videoPath": "",
+        "githubUrl": "https://github.com/junya005/yamaneko-engine"
     },
     {
         "id": "tool-rename-tool",
@@ -120,7 +149,7 @@
             "UPM",
             "C#"
         ],
-        "isFeatured": false,
+        "isFeatured": true,
         "techHighlight": "EditorWindowによる直感的GUI、名前順ソート連番リネーム、Undo/SetDirtyによる非破壊・安全設計、UPMパッケージ規格準拠",
         "platform": "Unity Editor (2022.3 LTS 以降)",
         "engine": "Unity / C# (Editor Extension)",
@@ -153,7 +182,7 @@
         "thumbnailPath": "",
         "projectPath": "",
         "videoPath": "",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/junya005/com.junya005.soundengine"
     },
     {
         "id": "game-parabolic-bomber",
@@ -180,7 +209,7 @@
         "thumbnailPath": "images/thumbnails/ParabolicBomber_bomb.png",
         "projectPath": "",
         "videoPath": "https://youtu.be/U_eTDAExFFQ",
-        "githubUrl": ""
+        "githubUrl": "https://github.com/junya005/yamaneko-engine-parabolic-bomber-portfolio"
     },
     {
         "id": "game-builkour",
@@ -225,7 +254,7 @@
             "産学提携",
             "C#"
         ],
-        "isFeatured": false,
+        "isFeatured": true,
         "techHighlight": "ボタン長押しによる精密な水位上昇・スケール制御、mm・μm単位の極小誤差スコアリング、Minute Gamesプラットフォーム対応",
         "platform": "Web (Minute Games β版 / WebGL)",
         "engine": "Unity / C#",

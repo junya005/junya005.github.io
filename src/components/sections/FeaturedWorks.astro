@@ -4,97 +4,260 @@ import type { Project } from "../../types/project";
 import { getBaseUrl, getDetailUrl, resolveAssetUrl } from "../../utils/url";
 
 const projects = projectsData as Project[];
-const featuredProjects = projects.filter((p) => p.isFeatured);
+
+// 1. ゲーム作品（代表作）
+const gameFeatured = projects.filter(
+  (p) =>
+    p.isFeatured &&
+    p.category !== "tool" &&
+    p.projectType !== "tool" &&
+    !p.tags?.includes("ツール") &&
+    !p.tags?.includes("エディタ拡張") &&
+    !p.tags?.includes("自作エンジン")
+);
+
+// 2. ツール・エンジン（代表作）
+const toolFeatured = projects.filter(
+  (p) =>
+    p.isFeatured &&
+    (p.category === "tool" ||
+      p.projectType === "tool" ||
+      p.tags?.includes("ツール") ||
+      p.tags?.includes("エディタ拡張") ||
+      p.tags?.includes("自作エンジン"))
+);
+
 const baseUrl = getBaseUrl();
 ---
 
 <section id="featured" class="section featured-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-sub">PICK UP WORKS</span>
-      <h2 class="section-title">代表作（Featured）</h2>
+      <span class="section-sub">FEATURED WORKS</span>
+      <h2 class="section-title">代表作</h2>
       <p class="section-desc">
-        チーム開発や個人開発において、設計・アルゴリズム・ゲームフィールの追求に特に注力した4作品です。
+        チーム開発・個人開発において、手触りの追求や設計・低レイヤー技術の探求に注力した代表プロジェクトです。<br class="desktop-only" />
+        各カードは右へスクロールしてご覧いただけます。
       </p>
     </div>
 
-    <div class="featured-grid">
-      {
-        featuredProjects.map((project, index) => {
-          const detailUrl = getDetailUrl(project.id);
-          const hasThumbnail = Boolean(project.thumbnailPath);
-          const thumbSrc = resolveAssetUrl(project.thumbnailPath);
+    <!-- 1. ゲーム作品レール -->
+    <div class="featured-category-block">
+      <div class="category-header">
+        <div class="category-title-wrap">
+          <span class="category-icon">🎮</span>
+          <h3 class="category-title">ゲーム作品</h3>
+          <span class="category-count">{gameFeatured.length} 作品</span>
+        </div>
+        <div class="carousel-nav" data-track="game-track">
+          <button class="nav-btn prev-btn" aria-label="ゲーム作品を前へスクロール" title="前へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+          <button class="nav-btn next-btn" aria-label="ゲーム作品を次へスクロール" title="次へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
 
-          return (
-            <article class="featured-card">
-              <div class="featured-badge">Featured #{index + 1}</div>
-              <div class="featured-thumb-wrap">
-                {hasThumbnail ? (
-                  <img
-                    src={thumbSrc}
-                    alt={project.title}
-                    class="featured-thumb-img"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="thumb-placeholder">
-                    <span class="placeholder-icon">
-                      {project.category === "tool" || project.tags?.includes("ツール") || project.tags?.includes("エディタ拡張") ? "🔧" : "🎮"}
-                    </span>
-                    <span class="placeholder-title">{project.title}</span>
+      <div class="carousel-track-container" id="game-track" tabindex="0" role="region" aria-label="ゲーム代表作のカルーセル">
+        <div class="carousel-track">
+          {
+            gameFeatured.map((project, index) => {
+              const detailUrl = getDetailUrl(project.id);
+              const hasThumbnail = Boolean(project.thumbnailPath);
+              const thumbSrc = resolveAssetUrl(project.thumbnailPath);
+
+              return (
+                <article class="featured-card">
+                  <div class="featured-badge">Game #{index + 1}</div>
+                  <div class="featured-thumb-wrap">
+                    {hasThumbnail ? (
+                      <img
+                        src={thumbSrc}
+                        alt={project.title}
+                        class="featured-thumb-img"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div class="thumb-placeholder">
+                        <span class="placeholder-icon">🎮</span>
+                        <span class="placeholder-title">{project.title}</span>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div class="featured-body">
-                <div class="card-tags">
-                  {project.tags.map((tag) => (
-                    <span class="badge-tag">{tag}</span>
-                  ))}
-                </div>
+                  <div class="featured-body">
+                    <div class="card-tags">
+                      {project.tags.map((tag) => (
+                        <span class="badge-tag">{tag}</span>
+                      ))}
+                    </div>
 
-                <h3 class="featured-card-title">
-                  <a href={detailUrl}>{project.title}</a>
-                </h3>
+                    <h4 class="featured-card-title">
+                      <a href={detailUrl}>{project.title}</a>
+                    </h4>
 
-                <p class="featured-desc">{project.description}</p>
+                    <p class="featured-desc">{project.description}</p>
 
-                {project.techHighlight && (
-                  <div class="highlight-box">
-                    <span class="highlight-label">技術ハイライト</span>
-                    <p class="highlight-content">{project.techHighlight}</p>
+                    {project.techHighlight && (
+                      <div class="highlight-box">
+                        <span class="highlight-label">技術ハイライト</span>
+                        <p class="highlight-content">{project.techHighlight}</p>
+                      </div>
+                    )}
+
+                    <div class="card-meta">
+                      <span class="meta-item">⏱ 期間: {project.duration || project.period}</span>
+                      {project.role && <span class="meta-item">👤 {project.role}</span>}
+                    </div>
+
+                    <div class="card-footer-actions">
+                      {project.projectPath && (
+                        <a
+                          href={project.projectPath}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn btn-primary btn-sm"
+                        >
+                          <span>▶ プレイ</span>
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn btn-github btn-sm"
+                          title="GitHubリポジトリを見る"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                          </svg>
+                          <span>GitHub</span>
+                        </a>
+                      )}
+                      <a href={detailUrl} class="btn btn-outline btn-sm">
+                        <span>解説 →</span>
+                      </a>
+                    </div>
                   </div>
-                )}
-
-                <div class="card-meta">
-                  <span class="meta-item">⏱ 期間: {project.duration || project.period}</span>
-                  {project.role && <span class="meta-item">👤 {project.role}</span>}
-                </div>
-
-                <div class="card-footer-actions">
-                  {project.projectPath && (
-                    <a
-                      href={project.projectPath}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="btn btn-primary btn-sm"
-                    >
-                      <span>▶ WebGLでプレイ</span>
-                    </a>
-                  )}
-                  <a href={detailUrl} class="btn btn-outline btn-sm">
-                    <span>技術解説を読む →</span>
-                  </a>
-                </div>
-              </div>
-            </article>
-          );
-        })
-      }
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
     </div>
 
+    <!-- 2. ツール・エンジンレール -->
+    <div class="featured-category-block">
+      <div class="category-header">
+        <div class="category-title-wrap">
+          <span class="category-icon">🔧</span>
+          <h3 class="category-title">ツール・エンジン</h3>
+          <span class="category-count">{toolFeatured.length} 作品</span>
+        </div>
+        <div class="carousel-nav" data-track="tool-track">
+          <button class="nav-btn prev-btn" aria-label="ツール・エンジンを前へスクロール" title="前へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+          </button>
+          <button class="nav-btn next-btn" aria-label="ツール・エンジンを次へスクロール" title="次へ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="carousel-track-container" id="tool-track" tabindex="0" role="region" aria-label="ツール・エンジン代表作のカルーセル">
+        <div class="carousel-track">
+          {
+            toolFeatured.map((project, index) => {
+              const detailUrl = getDetailUrl(project.id);
+              const hasThumbnail = Boolean(project.thumbnailPath);
+              const thumbSrc = resolveAssetUrl(project.thumbnailPath);
+
+              return (
+                <article class="featured-card">
+                  <div class="featured-badge featured-badge-tool">Tool/Engine #{index + 1}</div>
+                  <div class="featured-thumb-wrap">
+                    {hasThumbnail ? (
+                      <img
+                        src={thumbSrc}
+                        alt={project.title}
+                        class="featured-thumb-img"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div class="thumb-placeholder">
+                        <span class="placeholder-icon">🔧</span>
+                        <span class="placeholder-title">{project.title}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div class="featured-body">
+                    <div class="card-tags">
+                      {project.tags.map((tag) => (
+                        <span class="badge-tag">{tag}</span>
+                      ))}
+                    </div>
+
+                    <h4 class="featured-card-title">
+                      <a href={detailUrl}>{project.title}</a>
+                    </h4>
+
+                    <p class="featured-desc">{project.description}</p>
+
+                    {project.techHighlight && (
+                      <div class="highlight-box">
+                        <span class="highlight-label">技術ハイライト</span>
+                        <p class="highlight-content">{project.techHighlight}</p>
+                      </div>
+                    )}
+
+                    <div class="card-meta">
+                      <span class="meta-item">⏱ 期間: {project.duration || project.period}</span>
+                      {project.role && <span class="meta-item">👤 {project.role}</span>}
+                    </div>
+
+                    <div class="card-footer-actions">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="btn btn-github btn-sm"
+                          title="GitHubリポジトリを見る"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                          </svg>
+                          <span>GitHub</span>
+                        </a>
+                      )}
+                      <a href={detailUrl} class="btn btn-outline btn-sm">
+                        <span>技術解説を読む →</span>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 全作品一覧への誘導 -->
     <div class="all-works-cta">
-      <p class="cta-note">この他にも多数のゲーム作品を公開しています</p>
+      <p class="cta-note">この他にも多数のゲーム作品・プロトタイプを公開しています</p>
       <a href={`${baseUrl}works/`} class="btn btn-primary btn-large">
         <span>すべての作品を見る（全 {projects.length} 件）</span>
         <svg
@@ -114,9 +277,62 @@ const baseUrl = getBaseUrl();
   </div>
 </section>
 
+<script>
+  function setupCarousels() {
+    const navs = document.querySelectorAll<HTMLElement>(".carousel-nav");
+
+    navs.forEach((nav) => {
+      const trackId = nav.getAttribute("data-track");
+      if (!trackId) return;
+
+      const track = document.getElementById(trackId);
+      if (!track) return;
+
+      const prevBtn = nav.querySelector<HTMLButtonElement>(".prev-btn");
+      const nextBtn = nav.querySelector<HTMLButtonElement>(".next-btn");
+
+      const updateButtons = () => {
+        if (!prevBtn || !nextBtn) return;
+        const maxScroll = track.scrollWidth - track.clientWidth - 4;
+        prevBtn.disabled = track.scrollLeft <= 4;
+        nextBtn.disabled = track.scrollLeft >= maxScroll;
+      };
+
+      const getScrollDistance = () => {
+        const card = track.querySelector<HTMLElement>(".featured-card");
+        if (card) {
+          return card.offsetWidth + 24; // card width + gap
+        }
+        return 380;
+      };
+
+      prevBtn?.addEventListener("click", () => {
+        track.scrollBy({ left: -getScrollDistance(), behavior: "smooth" });
+      });
+
+      nextBtn?.addEventListener("click", () => {
+        track.scrollBy({ left: getScrollDistance(), behavior: "smooth" });
+      });
+
+      track.addEventListener("scroll", updateButtons, { passive: true });
+      window.addEventListener("resize", updateButtons, { passive: true });
+
+      // 初回状態判定
+      updateButtons();
+    });
+  }
+
+  // DOMContentLoaded または Astro ページ遷移に対応
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupCarousels);
+  } else {
+    setupCarousels();
+  }
+</script>
+
 <style>
   .container {
-    max-width: 1060px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
@@ -127,8 +343,8 @@ const baseUrl = getBaseUrl();
 
   .section-header {
     text-align: center;
-    max-width: 650px;
-    margin: 0 auto 3rem;
+    max-width: 720px;
+    margin: 0 auto 3.5rem;
   }
 
   .section-sub {
@@ -136,33 +352,158 @@ const baseUrl = getBaseUrl();
     color: var(--color-primary);
     font-weight: 700;
     font-size: 0.85rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     margin-bottom: 0.5rem;
   }
 
   .section-title {
-    font-size: 2.1rem;
-    margin-bottom: 0.75rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.85rem;
+    font-weight: 800;
   }
 
   .section-desc {
     color: var(--color-text-muted);
     font-size: 1rem;
     margin: 0;
+    line-height: 1.7;
+  }
+
+  .desktop-only {
+    display: inline;
   }
 
   .featured-section {
     background-color: var(--color-surface-cloud);
   }
 
-  .featured-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-    margin-bottom: 3rem;
+  /* カテゴリ別ブロック */
+  .featured-category-block {
+    margin-bottom: 3.5rem;
   }
 
+  .featured-category-block:last-of-type {
+    margin-bottom: 4rem;
+  }
+
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(72, 184, 236, 0.15);
+  }
+
+  .category-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .category-icon {
+    font-size: 1.5rem;
+  }
+
+  .category-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin: 0;
+  }
+
+  .category-count {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-subtle);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-pill);
+  }
+
+  /* カルーセルナビゲーションボタン */
+  .carousel-nav {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: #ffffff;
+    color: var(--color-text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(72, 184, 236, 0.35);
+  }
+
+  .nav-btn:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: #f8fafc;
+    border-color: var(--color-border-light);
+  }
+
+  /* カルーセルトラックコンテナ */
+  .carousel-track-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem 0.25rem 1.25rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(72, 184, 236, 0.4) rgba(0, 0, 0, 0.04);
+    outline: none;
+  }
+
+  .carousel-track-container::-webkit-scrollbar {
+    height: 7px;
+  }
+
+  .carousel-track-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+  }
+
+  .carousel-track-container::-webkit-scrollbar-thumb {
+    background: rgba(72, 184, 236, 0.4);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  .carousel-track-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+  }
+
+  /* 作品カード */
   .featured-card {
+    width: 370px;
+    flex: 0 0 370px;
+    scroll-snap-align: start;
     background: #ffffff;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
@@ -173,13 +514,14 @@ const baseUrl = getBaseUrl();
     overflow: hidden;
     transition:
       transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.25s ease;
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
   }
 
   .featured-card:hover {
     transform: translateY(-6px);
     box-shadow: var(--shadow-card-hover);
-    border-color: rgba(72, 184, 236, 0.4);
+    border-color: rgba(72, 184, 236, 0.45);
   }
 
   .featured-badge {
@@ -192,13 +534,19 @@ const baseUrl = getBaseUrl();
     color: var(--color-primary);
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.2rem 0.65rem;
+    padding: 0.25rem 0.7rem;
     border-radius: var(--radius-pill);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .featured-badge-tool {
+    color: #0284c7;
+    background: rgba(240, 249, 255, 0.95);
+    border: 1px solid rgba(14, 165, 233, 0.3);
   }
 
   .featured-thumb-wrap {
-    height: 180px;
+    height: 185px;
     background-color: #f1f8fc;
     display: flex;
     align-items: center;
@@ -211,11 +559,11 @@ const baseUrl = getBaseUrl();
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
   }
 
   .featured-card:hover .featured-thumb-img {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .thumb-placeholder {
@@ -227,7 +575,7 @@ const baseUrl = getBaseUrl();
   }
 
   .placeholder-icon {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
 
   .placeholder-title {
@@ -251,12 +599,16 @@ const baseUrl = getBaseUrl();
   }
 
   .featured-card-title {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     margin-bottom: 0.6rem;
+    font-weight: 700;
+    line-height: 1.4;
   }
 
   .featured-card-title a {
     color: var(--color-text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
 
   .featured-card-title a:hover {
@@ -264,7 +616,7 @@ const baseUrl = getBaseUrl();
   }
 
   .featured-desc {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: 1rem;
@@ -298,27 +650,60 @@ const baseUrl = getBaseUrl();
 
   .card-meta {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.35rem;
     font-size: 0.8rem;
     color: var(--color-text-light);
     margin-bottom: 1.25rem;
-    padding-top: 0.5rem;
+    padding-top: 0.65rem;
     border-top: 1px dashed var(--color-border);
+  }
+
+  .meta-item {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .card-footer-actions {
     display: flex;
     gap: 0.5rem;
     margin-top: auto;
+    flex-wrap: wrap;
   }
 
   .btn-sm {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.84rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
     flex: 1;
+    min-width: 90px;
     text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
   }
 
+  .btn-github {
+    background: #24292f;
+    color: #ffffff;
+    border: 1px solid #24292f;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-github:hover {
+    background: #090d11;
+    border-color: #090d11;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* CTA ボタン */
   .all-works-cta {
     text-align: center;
     padding-top: 1rem;
@@ -336,11 +721,31 @@ const baseUrl = getBaseUrl();
     font-size: 1.05rem;
   }
 
-  @media (max-width: 960px) {
-    .featured-grid {
-      grid-template-columns: 1fr;
-      max-width: 500px;
-      margin: 0 auto 2.5rem;
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.85rem;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+
+    .category-title {
+      font-size: 1.25rem;
+    }
+
+    .featured-card {
+      width: 82vw;
+      flex: 0 0 82vw;
+      max-width: 340px;
+    }
+
+    .card-footer-actions {
+      flex-direction: column;
+    }
+
+    .btn-sm {
+      width: 100%;
     }
   }
 </style>
